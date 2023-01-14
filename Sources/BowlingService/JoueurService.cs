@@ -31,9 +31,9 @@ namespace BowlingService
         /// </summary>
         /// <param name="_joueur"></param>
         /// <returns></returns>
-        public async Task<bool> Add(JoueurDTO _joueur)
+        public async Task<JoueurDTO> Add(JoueurDTO _joueur)
         {
-            bool result = false;
+            JoueurDTO result = null;
             try
                 {
                     //Mapping entre la classe joueur et la classe joueurEntity
@@ -58,7 +58,7 @@ namespace BowlingService
                         }
                         entity.PartieEntities.Add(partieEntity);
                     }
-                    result = await _joueurRepository.Add(entity);
+                    result = _mapper.Map<JoueurDTO>(await _joueurRepository.Add(entity));
                 }
                 catch (Exception ex)
                 {

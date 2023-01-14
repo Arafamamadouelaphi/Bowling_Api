@@ -15,31 +15,90 @@ public class JoueurController:Controller
         _joueurService = joueurService;
     }
     
+    // GET: api/Joueur
     [HttpGet]
-    public IActionResult Get()
+    public async Task<IActionResult> Get()
     {
-        return Ok(_joueurService.GetAll());
+        try
+        {
+            var result = await _joueurService.GetAll();
+            if (result == null)
+            {
+                return NotFound();
+            }
+            return Ok(result);
+        }
+        catch (Exception e)
+        {
+            return StatusCode(StatusCodes.Status500InternalServerError, e.Message);
+            throw;
+        }
     }
     
+    // GET: api/Joueur/Djon
     [HttpGet("{name}")]
-    public IActionResult Get(string name)
+    public async Task<IActionResult> Get(string name)
     {
-        return Ok(_joueurService.GetDataWithName(name));
+        try
+        {
+            if(name == null)
+                return BadRequest("Le nom du joueur est obligatoire");
+            
+            var result = _joueurService.GetDataWithName(name).Result;
+            if (result == null)
+            {
+                return NotFound();
+            }
+            return Ok(result);
+        }
+        catch (Exception e)
+        {
+            return StatusCode(StatusCodes.Status500InternalServerError, e.Message);
+            throw;
+        }
     }
     
+    // POST: api/Joueur
     [HttpPost]
-    public IActionResult Post([FromBody] JoueurDTO joueur)
+    public async Task<ActionResult<JoueurDTO>> Post([FromBody] JoueurDTO joueur)
     {
-        _joueurService.Add(joueur);
-        return Ok();
+        try
+        {
+            if (joueur== null)
+            {
+                return BadRequest("Le joueur est obligatoire");
+            }
+            var createdJoueur = _joueurService.Add(joueur).Result;
+            return CreatedAtAction(nameof(Get), new { id = createdJoueur.Id }, createdJoueur);
+
+        }
+        catch (Exception e)
+        {
+            return StatusCode(StatusCodes.Status500InternalServerError, e.Message);
+            throw;
+        }
     }
     
-    [HttpPut]
-    public IActionResult Put([FromBody] JoueurDTO joueur)
+    [HttpPut("{name}")]
+    public async Task<ActionResult<JoueurDTO>> Put(string name,[FromBody] JoueurDTO joueur)
     {
-        _joueurService.Update(joueur);
-        return Ok();
+        try
+        {
+            if(joueur == null)
+                return BadRequest("Le joueur est obligatoire");
+            
+            var updateJoueur = _joueurService.Update(joueur);
+            if (updateJoueur.Result == null)
+            {
+                return NotFound();
+            }
+            
+            return Ok(updateJoueur);
+        }
+        catch (Exception e)
+        {
+            StatusCode(StatusCodes.Status500InternalServerError, e.Message);
+            throw;
+        }
     }
-    
-    
 }
