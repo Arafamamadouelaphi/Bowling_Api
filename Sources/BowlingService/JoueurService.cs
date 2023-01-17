@@ -43,7 +43,7 @@ namespace BowlingService
                         Pseudo = _joueur.Pseudo,
                     };
 
-                    //Parcourt de la liste des parties d'un joueur
+                    //Parcourt de la liste des parties d'un joueur DTA
                     for (int i = 0; i < _joueur.PartieDTO.Count; i++)
                     {
                         //Mapping entre les parties d'un joueur et les partieEntity d'une partieEntity

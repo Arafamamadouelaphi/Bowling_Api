@@ -9,17 +9,12 @@ namespace BowlingEF.Entities
     public class FrameDTO
     {
         #region Properties
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        
         public long Id { get; set; }
-        [Required]
         public int Numero { get; set; }
-        [Required]
         public int Lancer1 { get; set; }
-        [Required]
         public int Lancer2 { get; set; }
         public int Lancer3 { get; set; }
-
         public PartieDTO Partie { get; set; }
         #endregion
     }
