@@ -16,7 +16,6 @@ namespace BowlingEF.Entities
         public string Nom { get; set; }
         public ICollection<JoueurDTO> Joueurs { get; set; }
         #endregion
-
         #region Constructeurs
         public EquipeDTO()
         {

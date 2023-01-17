@@ -7,6 +7,6 @@ public class PartieProfile:Profile
 {
     public PartieProfile()
     {
-        CreateMap<PartieDTO, PartieEntity>();
+        CreateMap<PartieDTO, PartieEntity>().ReverseMap();
     }
 }

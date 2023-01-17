@@ -1,4 +1,4 @@
-using BowlingEF.Entities;
+  using BowlingEF.Entities;
 
 namespace BowlingRepository.Interface;
 
