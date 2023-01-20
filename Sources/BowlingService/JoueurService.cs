@@ -35,36 +35,25 @@ namespace BowlingService
         {
             JoueurDTO result = null;
             try
+            {
+                //Mapping entre la classe joueur et la classe joueurEntity
+                JoueurEntity entity = _mapper.Map<JoueurEntity>(_joueur);
+                    
+                    
+                entity.PartieEntities=_joueur.PartieDTO.Select(p =>
                 {
-                    //Mapping entre la classe joueur et la classe joueurEntity
-                    JoueurEntity entity = new JoueurEntity
-                    {
-                        Id = _joueur.Id,
-                        Pseudo = _joueur.Pseudo,
-                    };
-
-                    //Parcourt de la liste des parties d'un joueur
-                    for (int i = 0; i < _joueur.PartieDTO.Count; i++)
-                    {
-                        //Mapping entre les parties d'un joueur et les partieEntity d'une partieEntity
-                        PartieEntity partieEntity = _mapper.Map<PartieEntity>(_joueur.PartieDTO.ElementAt(1));
-
-                        //Parcourt de la liste des frames d'une partie
-                        for (int j = 0; j < _joueur.PartieDTO.ElementAt(i).FramesDTO.Count; j++)
-                        {
-                            //Mapping entre les frames d'une partie et les frameEntity d'une partieEntity
-                            FrameEntity frameEntity = _mapper.Map<FrameEntity>(_joueur.PartieDTO.ElementAt(i).FramesDTO.ElementAt(j));
-                            partieEntity.Frames.Add(frameEntity);
-                        }
-                        entity.PartieEntities.Add(partieEntity);
-                    }
-                    result = _mapper.Map<JoueurDTO>(await _joueurRepository.Add(entity));
-                }
-                catch (Exception ex)
-                {
-                    Debug.WriteLine(ex);
-                    throw;
-                }
+                    var partieEntity = _mapper.Map<PartieEntity>(p);
+                    partieEntity.Frames=p.FramesDTO.Select(f => _mapper.Map<FrameEntity>(f)).ToList();
+                    return partieEntity;
+                }).ToList();
+                    
+                result = _mapper.Map<JoueurDTO>(await _joueurRepository.Add(entity));
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+                throw;
+            }
             return result;
         }
 
@@ -88,8 +77,9 @@ namespace BowlingService
             {
                 List<JoueurDTO> joueurs = new  List<JoueurDTO>();
                 var data= await _joueurRepository.GetAllJoueur();
-                foreach (var item in data)
-                    joueurs.Add(_mapper.Map<JoueurDTO>(item));
+                
+                joueurs= data.Select(j => _mapper.Map<JoueurDTO>(j)).ToList();
+               
                 return joueurs;
             }
         }
@@ -101,28 +91,22 @@ namespace BowlingService
         /// <returns></returns>
         public async Task<JoueurDTO> GetDataWithName(string name)
         {
-            using (var context = new BowlingContext())
-            {
-                JoueurDTO _joueur = null;
+            JoueurDTO _joueur = null;
 
-                var query = _joueurRepository.GetJoueurByNom(name);
-                _joueur = _mapper.Map<JoueurDTO>(query.Result);
-                return _joueur;
-            }
+            var query = _joueurRepository.GetJoueurByNom(name);
+            _joueur = _mapper.Map<JoueurDTO>(query.Result);
+            return _joueur;
         }
 
         public async Task<bool> Update(JoueurDTO _joueur)
         {
             bool result = false;
-            using (var context = new BowlingContext())
+            JoueurEntity entity = _joueurRepository.GetJoueur(_joueur.Id).Result;
+            if (entity!=null)
             {
-                JoueurEntity entity = _joueurRepository.GetJoueur(_joueur.Id).Result;
-                if (entity!=null)
-                {
-                    entity.Pseudo = _joueur.Pseudo;
-                    result = _joueurRepository.Update(entity).Result;
-                }
-            }
+                entity.Pseudo = _joueur.Pseudo;
+                result = _joueurRepository.Update(entity).Result;
+            } 
             return result;
         }
         #endregion
