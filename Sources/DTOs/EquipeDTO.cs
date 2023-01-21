@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BowlingEF.Entities
+namespace DTOs
 {
     /// <summary>
     /// Classe de gestion des equipes

@@ -1,5 +1,6 @@
 using BowlingEF.Entities;
 using BowlingService.Interfaces;
+using DTOs;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BowlingApi.Controllers;

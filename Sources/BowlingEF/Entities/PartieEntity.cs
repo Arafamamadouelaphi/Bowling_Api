@@ -21,7 +21,7 @@ namespace BowlingEF.Entities
         [ForeignKey("JoueurForeignKey")]
         public JoueurEntity Joueur { get; set; }
         [Required]
-        public DateTime Date { get; set; }
+        public DateTime Date { get; set; } = DateTime.Now;
         public ICollection<FrameEntity> Frames { get; set; }
         [Required]
         public int? Score { get; set; }
