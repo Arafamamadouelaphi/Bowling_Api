@@ -85,22 +85,19 @@ namespace BowlingService
         /// <returns></returns>
         public  async Task<IEnumerable<JoueurDTO>> GetAll()
         {
-            using (var context = new BowlingContext())
+            List<JoueurDTO> joueurs = new  List<JoueurDTO>();
+            try
             {
-                List<JoueurDTO> joueurs = new  List<JoueurDTO>();
-                try
-                {
-                    var joueursEntity = await _joueurRepository.GetAllJoueur();
-                    joueurs = joueursEntity.Select(j => _mapper.Map<JoueurDTO>(j)).ToList();
-                    _logger.LogInformation("All players were retrieved");
-                }
-                catch (Exception ex)
-                {
-                    _logger.LogError(ex, "Error while retrieving all players");
-                    throw;
-                }
-                return joueurs;
+                var joueursEntity = await _joueurRepository.GetAllJoueur();
+                joueurs = joueursEntity.Select(j => _mapper.Map<JoueurDTO>(j)).ToList();
+                _logger.LogInformation("All players were retrieved");
             }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error while retrieving all players");
+                throw;
+            }
+            return joueurs;
         }
 
         /// <summary>
