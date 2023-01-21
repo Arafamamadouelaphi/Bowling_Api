@@ -1,5 +1,6 @@
 using AutoMapper;
 using BowlingEF.Entities;
+using DTOs;
 
 namespace Mapper;
 

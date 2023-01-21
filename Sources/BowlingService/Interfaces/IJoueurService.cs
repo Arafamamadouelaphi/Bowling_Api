@@ -1,4 +1,5 @@
 using BowlingEF.Entities;
+using DTOs;
 
 namespace BowlingService.Interfaces;
 

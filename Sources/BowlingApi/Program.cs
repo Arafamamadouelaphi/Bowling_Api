@@ -19,6 +19,13 @@ builder.Services.AddAutoMapper(typeof(JoueurProfile));
 builder.Services.AddScoped<IJoueurService, JoueurService>();
 builder.Services.AddScoped<IJoueurRepository, JoueurRepository>();
 
+//configure Logger
+builder.Services.AddLogging(configure =>
+{
+    configure.AddConsole();
+    configure.AddDebug();
+});
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

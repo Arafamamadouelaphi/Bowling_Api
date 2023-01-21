@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace BowlingEF.Entities
+namespace DTOs
 {
     /// <summary>
     /// Classe de gestion des Joueurs
@@ -18,4 +18,6 @@ namespace BowlingEF.Entities
         public ICollection<PartieDTO> PartieDTO { get; set; } = new List<PartieDTO>();
         #endregion
     }
+    
+    
 }

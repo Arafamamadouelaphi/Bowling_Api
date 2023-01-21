@@ -5,6 +5,7 @@ using System.Diagnostics;
 using AutoMapper;
 using BowlingRepository.Interface;
 using BowlingService.Interfaces;
+using DTOs;
 
 namespace BowlingService
 {
@@ -20,10 +21,11 @@ namespace BowlingService
         
         #region Méthodes
 
-        public JoueurService(IJoueurRepository joueurRepository,IMapper mapper)
+        public JoueurService(IJoueurRepository joueurRepository,IMapper mapper , ILogger<JoueurService> logger)
         {
             _joueurRepository = joueurRepository;
             _mapper = mapper;
+            _logger = logger;
         }
 
         /// <summary>
@@ -38,8 +40,6 @@ namespace BowlingService
             {
                 //Mapping entre la classe joueur et la classe joueurEntity
                 JoueurEntity entity = _mapper.Map<JoueurEntity>(_joueur);
-                    
-                    
                 entity.PartieEntities=_joueur.PartieDTO.Select(p =>
                 {
                     var partieEntity = _mapper.Map<PartieEntity>(p);
@@ -48,10 +48,11 @@ namespace BowlingService
                 }).ToList();
                     
                 result = _mapper.Map<JoueurDTO>(await _joueurRepository.Add(entity));
+                _logger.LogInformation("A new player was added : {player}", _joueur.Pseudo);
             }
             catch (Exception ex)
             {
-                Debug.WriteLine(ex);
+                _logger.LogError(ex, "Error while adding new player : {player}", _joueur.Pseudo);
                 throw;
             }
             return result;
@@ -64,7 +65,18 @@ namespace BowlingService
         /// <returns></returns>
         public async Task<bool> Delete(JoueurDTO _joueur)
         {
-            return await _joueurRepository.Delete(_joueur.Id);
+            var result = false;
+            try
+            {
+                result = await _joueurRepository.Delete(_joueur.Id);
+                _logger.LogInformation("A player was deleted : {player}", _joueur.Pseudo);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error while deleting player : {player}", _joueur.Pseudo);
+                throw;
+            }
+            return result;
         }
 
         /// <summary>
@@ -76,10 +88,17 @@ namespace BowlingService
             using (var context = new BowlingContext())
             {
                 List<JoueurDTO> joueurs = new  List<JoueurDTO>();
-                var data= await _joueurRepository.GetAllJoueur();
-                
-                joueurs= data.Select(j => _mapper.Map<JoueurDTO>(j)).ToList();
-               
+                try
+                {
+                    var joueursEntity = await _joueurRepository.GetAllJoueur();
+                    joueurs = joueursEntity.Select(j => _mapper.Map<JoueurDTO>(j)).ToList();
+                    _logger.LogInformation("All players were retrieved");
+                }
+                catch (Exception ex)
+                {
+                    _logger.LogError(ex, "Error while retrieving all players");
+                    throw;
+                }
                 return joueurs;
             }
         }
@@ -92,22 +111,47 @@ namespace BowlingService
         public async Task<JoueurDTO> GetDataWithName(string name)
         {
             JoueurDTO _joueur = null;
-
-            var query = _joueurRepository.GetJoueurByNom(name);
-            _joueur = _mapper.Map<JoueurDTO>(query.Result);
+            
+            try
+            {
+                var joueurEntity = await _joueurRepository.GetJoueurByNom(name);
+                _joueur = _mapper.Map<JoueurDTO>(joueurEntity);
+                _logger.LogInformation("Player was retrieved : {player}", name);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error while retrieving player : {player}", name);
+                throw;
+            }
             return _joueur;
         }
 
         public async Task<bool> Update(JoueurDTO _joueur)
         {
             bool result = false;
-            JoueurEntity entity = _joueurRepository.GetJoueur(_joueur.Id).Result;
-            if (entity!=null)
+            try
             {
-                entity.Pseudo = _joueur.Pseudo;
-                result = _joueurRepository.Update(entity).Result;
-            } 
-            return result;
+                JoueurEntity entity = _joueurRepository.GetJoueur(_joueur.Id).Result;
+                if (entity!= null)
+                {
+                    entity.Pseudo = _joueur.Pseudo;
+                    entity.PartieEntities = _joueur.PartieDTO.Select(p =>
+                    {
+                        var partieEntity = _mapper.Map<PartieEntity>(p);
+                        partieEntity.Frames = p.FramesDTO.Select(f => _mapper.Map<FrameEntity>(f)).ToList();
+                        return partieEntity;
+                    }).ToList();
+                    result = await _joueurRepository.Update(entity);
+                    _logger.LogInformation("Player was updated : {player}", _joueur.Pseudo);
+                }
+                
+                return result;
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error while updating player : {player}", _joueur.Pseudo);
+                throw;
+            }
         }
         #endregion
 
