@@ -42,7 +42,7 @@ public class JoueurController:Controller
     {
         try
         {
-            if(name == null)
+            if(String.IsNullOrWhiteSpace(name))
                 return BadRequest("Le nom du joueur est obligatoire");
             
             var result = _joueurService.GetDataWithName(name).Result;
