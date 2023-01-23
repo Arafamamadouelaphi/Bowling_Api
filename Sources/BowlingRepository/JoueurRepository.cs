@@ -23,12 +23,9 @@ public class JoueurRepository:IJoueurRepository
 
     public async Task<bool> Delete(long id)
     {
-        using (var context = new BowlingContext())
-        {
-            JoueurEntity entity = context.Joueurs.Find(id);
-            context.Joueurs.Remove(entity);
-            return await context.SaveChangesAsync() > 0;
-        }
+        JoueurEntity entity = _context.Joueurs.Find(id);
+        _context.Joueurs.Remove(entity);
+        return await _context.SaveChangesAsync() > 0;
     }
 
     public async Task<bool> Update(JoueurEntity joueur)

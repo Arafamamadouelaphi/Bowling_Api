@@ -1,4 +1,5 @@
 using AutoMapper;
+using BowlingEF.Context;
 using BowlingLib.Model;
 using BowlingRepository;
 using BowlingRepository.Interface;
@@ -6,6 +7,7 @@ using BowlingService;
 using BowlingService.Interfaces;
 using Business;
 using Mapper;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -17,6 +19,13 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddAutoMapper(typeof(JoueurProfile));
 builder.Services.AddScoped<IJoueurService, JoueurService>();
+
+//Configurer la connexion à la base de données SQLite du projet BowlingEF
+builder.Services.AddDbContext<BowlingContext>(options =>
+{
+    options.UseSqlite("Data Source=bowling.db");
+});
+
 builder.Services.AddScoped<IJoueurRepository, JoueurRepository>();
 
 //configure Logger
@@ -40,5 +49,6 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 
 app.MapControllers();
+
 
 app.Run();
