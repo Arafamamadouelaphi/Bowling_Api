@@ -27,19 +27,11 @@
         
     </ItemGroup>
 
-<<<<<<< HEAD
-=======
     <ItemGroup>
       <None Remove="Microsoft.VisualStudio.Web.CodeGeneration.Design" />
       <None Remove="Microsoft.EntityFrameworkCore.SqlServer" />
       <None Remove="Microsoft.EntityFrameworkCore.Tools" />
       <None Remove="Microsoft.EntityFrameworkCore.Sqlite" />
     </ItemGroup>
-    <ItemGroup>
-      <None Update="bowling.db">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </None>
-    </ItemGroup>
 
->>>>>>> origine/Branche1
 </Project>
