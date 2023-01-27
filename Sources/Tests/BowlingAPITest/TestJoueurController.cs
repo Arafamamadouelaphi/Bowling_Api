@@ -50,7 +50,7 @@ public  class TestController
     {
         
         var testItems = new List<JoueurDTO>();
-        testItems.Add(new JoueurDTO {Pseudo = "Item1" });
+        testItems.Add(new JoueurDTO { Pseudo = "Item1" });
         testItems.Add(new JoueurDTO { Pseudo = "Item2" });
         return testItems;
     }
