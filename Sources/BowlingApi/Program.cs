@@ -27,6 +27,8 @@ builder.Services.AddDbContext<BowlingContext>(options =>
 });
 
 builder.Services.AddScoped<IJoueurRepository, JoueurRepository>();
+builder.Services.AddScoped<IpartieRepository, PartieRepository>();
+builder.Services.AddScoped<IpartieService, PartieService>();
 
 //configure Logger
 builder.Services.AddLogging(configure =>
