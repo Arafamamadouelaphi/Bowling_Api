@@ -37,6 +37,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BowlingAPITest", "Tests\Bow
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GraphQL Project", "GraphQL Project\GraphQL Project.csproj", "{F8016AE7-A927-4E68-A7CF-303AB3B8C2C3}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "API Gateway", "API Gateway\API Gateway.csproj", "{20E9E8DF-B3CA-4F4C-9B16-5E880158C43C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApiBowlingGateway", "ApiBowlingGateway\ApiBowlingGateway.csproj", "{C3274794-8D2A-4695-B8B5-7B0B7B65C917}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -87,6 +91,14 @@ Global
 		{F8016AE7-A927-4E68-A7CF-303AB3B8C2C3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F8016AE7-A927-4E68-A7CF-303AB3B8C2C3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F8016AE7-A927-4E68-A7CF-303AB3B8C2C3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{20E9E8DF-B3CA-4F4C-9B16-5E880158C43C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{20E9E8DF-B3CA-4F4C-9B16-5E880158C43C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{20E9E8DF-B3CA-4F4C-9B16-5E880158C43C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{20E9E8DF-B3CA-4F4C-9B16-5E880158C43C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C3274794-8D2A-4695-B8B5-7B0B7B65C917}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C3274794-8D2A-4695-B8B5-7B0B7B65C917}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C3274794-8D2A-4695-B8B5-7B0B7B65C917}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C3274794-8D2A-4695-B8B5-7B0B7B65C917}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
