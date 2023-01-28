@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace BowlingRepository.Interface
 {
-	public class PartieRepository:IpartieRepository
+    public class PartieRepository : IpartieRepository
     {
         private readonly BowlingContext _context;
         public PartieRepository()
@@ -36,7 +36,7 @@ namespace BowlingRepository.Interface
             }
         }
 
-      
+
 
         public async Task<List<PartieEntity>> GetAll()
         {
@@ -60,4 +60,5 @@ namespace BowlingRepository.Interface
         }
     }
 }
+
 

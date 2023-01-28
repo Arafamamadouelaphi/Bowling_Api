@@ -31,7 +31,7 @@ namespace BowlingApi.Controllers
 
         // GET: api/Partie
         [HttpGet]
-        public async Task< IActionResult >Get()
+        public async Task<IActionResult> Get()
         {
             try
             {
@@ -47,13 +47,13 @@ namespace BowlingApi.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError, e.Message);
                 throw;
             }
-       //var result =  _partieService.GetAll().Result;
+            //var result =  _partieService.GetAll().Result;
             //return Ok(result);
         }
 
         // GET: api/Partie/djon
         [HttpGet("{name}")]
-        public async Task < IActionResult> Get(string name)
+        public async Task<IActionResult> Get(string name)
         {
             //  return Ok(_partieService.GetDataWithName(name));
 
@@ -80,7 +80,7 @@ namespace BowlingApi.Controllers
 
         // POST: api/Partie
         [HttpPost]
-        public async Task<ActionResult<PartieDTO>>  Post([FromBody] PartieDTO parti)
+        public async Task<ActionResult<PartieDTO>> Post([FromBody] PartieDTO parti)
         {
 
 
@@ -130,3 +130,4 @@ namespace BowlingApi.Controllers
 
     }
 }
+

@@ -3,7 +3,7 @@ using BowlingEF.Entities;
 
 namespace BowlingService.Interfaces
 {
-	public interface IpartieService
+    public interface IpartieService
     {
         public Task<bool> Add(PartieDTO _partie);
         public Task<bool> Delete(PartieDTO _partie);

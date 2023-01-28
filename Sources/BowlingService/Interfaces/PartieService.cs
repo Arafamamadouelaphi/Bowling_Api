@@ -11,8 +11,8 @@ using Microsoft.Extensions.Logging;
 
 namespace BowlingService.Interfaces
 {
-	public class PartieService:IpartieService
-	{
+    public class PartieService : IpartieService
+    {
         private readonly IpartieRepository _IpartieRepository;
         private readonly ILogger<JoueurService> _logger;
         private readonly IMapper _mapper;
@@ -25,9 +25,9 @@ namespace BowlingService.Interfaces
         }
 
         public PartieService()
-		{
+        {
 
-		}
+        }
 
         //Add
 
@@ -101,9 +101,9 @@ namespace BowlingService.Interfaces
             throw new NotImplementedException();
         }
 
-        public async  Task<PartieDTO> GetDataWithName(string nom)
+        public async Task<PartieDTO> GetDataWithName(string nom)
         {
-            PartieDTO  _partie = null;
+            PartieDTO _partie = null;
 
             try
             {
@@ -126,19 +126,20 @@ namespace BowlingService.Interfaces
         {
 
             bool result = false;
-            using(var context =new BowlingContext())
+            using (var context = new BowlingContext())
             {
                 PartieEntity entity = _mapper.Map<PartieEntity>(_partie);
                 entity.Date = _partie.Date;
                 entity.Score = _partie.Score;
-                result =  _IpartieRepository.Update(entity).Result;
+                result = _IpartieRepository.Update(entity).Result;
 
             }
             return result;
 
         }
 
-       
+
     }
 }
+
 
