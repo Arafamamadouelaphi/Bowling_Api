@@ -33,10 +33,4 @@
       <None Remove="Microsoft.EntityFrameworkCore.Tools" />
       <None Remove="Microsoft.EntityFrameworkCore.Sqlite" />
     </ItemGroup>
-    <ItemGroup>
-      <None Update="bowling.db">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </None>
-    </ItemGroup>
-
 </Project>
