@@ -3,6 +3,7 @@ using BowlingRepository.Interface;
 using BowlingService;
 using BowlingService.Interfaces;
 using GraphQL_Project;
+using GraphQL_Project.Data;
 using Mapper;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -10,10 +11,13 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddRazorPages();
 builder.Services.AddGraphQLServer()
-    .AddQueryType<Query>();
+    .AddQueryType<Query>()
+    .AddMutationType<Mutation>();
 builder.Services.AddAutoMapper(typeof(JoueurProfile));
 builder.Services.AddScoped<IJoueurService, JoueurService>();
 builder.Services.AddScoped<IJoueurRepository, JoueurRepository>();
+
+
 
 var app = builder.Build();
 
