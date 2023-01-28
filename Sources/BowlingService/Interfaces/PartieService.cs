@@ -6,6 +6,7 @@ using BowlingEF.Entities;
 using BowlingLib.Model;
 using BowlingRepository;
 using BowlingRepository.Interface;
+using DTOs;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 

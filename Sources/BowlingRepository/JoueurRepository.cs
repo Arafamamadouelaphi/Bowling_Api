@@ -14,20 +14,18 @@ public class JoueurRepository:IJoueurRepository
         _context = new BowlingContext();
     }
 
-    public async Task<bool> Add(JoueurEntity joueur)
+    public async Task<JoueurEntity> Add(JoueurEntity joueur)
     {
-        _context.Joueurs.Add(joueur);
-         return await _context.SaveChangesAsync()  > 0;
+        var result = await _context.Joueurs.AddAsync(joueur);  
+        await _context.SaveChangesAsync();
+        return result.Entity;
     }
 
     public async Task<bool> Delete(long id)
     {
-        using (var context = new BowlingContext())
-        {
-            JoueurEntity entity = context.Joueurs.Find(id);
-            context.Joueurs.Remove(entity);
-            return await context.SaveChangesAsync() > 0;
-        }
+        JoueurEntity entity = _context.Joueurs.Find(id);
+        _context.Joueurs.Remove(entity);
+        return await _context.SaveChangesAsync() > 0;
     }
 
     public async Task<bool> Update(JoueurEntity joueur)

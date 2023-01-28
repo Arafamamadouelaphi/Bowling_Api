@@ -5,8 +5,9 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using BowlingEF.Entities;
 
-namespace BowlingEF.Entities
+namespace DTOs
 {
     /// <summary>
     /// Classe de gestion des parties
@@ -32,4 +33,5 @@ namespace BowlingEF.Entities
         }
         #endregion
     }
+    
 }

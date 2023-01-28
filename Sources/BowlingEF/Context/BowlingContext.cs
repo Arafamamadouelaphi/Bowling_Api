@@ -23,5 +23,16 @@ namespace BowlingEF.Context
             optionsBuilder.UseSqlite("Data Source=bowling.db");
         }
 
+        public BowlingContext()
+        {
+        }
+
+        public BowlingContext(DbContextOptions<BowlingContext> options)
+            : base(options)
+        {
+        }
+        
+        
+
     }
 }

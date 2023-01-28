@@ -5,6 +5,7 @@ using System.Diagnostics;
 using AutoMapper;
 using BowlingRepository.Interface;
 using BowlingService.Interfaces;
+using DTOs;
 
 namespace BowlingService
 {
@@ -20,10 +21,11 @@ namespace BowlingService
         
         #region Méthodes
 
-        public JoueurService(IJoueurRepository joueurRepository,IMapper mapper)
+        public JoueurService(IJoueurRepository joueurRepository,IMapper mapper , ILogger<JoueurService> logger)
         {
             _joueurRepository = joueurRepository;
             _mapper = mapper;
+            _logger = logger;
         }
 
         /// <summary>
@@ -31,40 +33,28 @@ namespace BowlingService
         /// </summary>
         /// <param name="_joueur"></param>
         /// <returns></returns>
-        public async Task<bool> Add(JoueurDTO _joueur)
+        public async Task<JoueurDTO> Add(JoueurDTO _joueur)
         {
-            bool result = false;
+            JoueurDTO result = null;
             try
+            {
+                //Mapping entre la classe joueur et la classe joueurEntity
+                JoueurEntity entity = _mapper.Map<JoueurEntity>(_joueur);
+                entity.PartieEntities=_joueur.PartieDTO.Select(p =>
                 {
-                    //Mapping entre la classe joueur et la classe joueurEntity
-                    JoueurEntity entity = new JoueurEntity
-                    {
-                        Id = _joueur.Id,
-                        Pseudo = _joueur.Pseudo,
-                    };
-
-                    //Parcourt de la liste des parties d'un joueur DTA
-                    for (int i = 0; i < _joueur.PartieDTO.Count; i++)
-                    {
-                        //Mapping entre les parties d'un joueur et les partieEntity d'une partieEntity
-                        PartieEntity partieEntity = _mapper.Map<PartieEntity>(_joueur.PartieDTO.ElementAt(1));
-
-                        //Parcourt de la liste des frames d'une partie
-                        for (int j = 0; j < _joueur.PartieDTO.ElementAt(i).FramesDTO.Count; j++)
-                        {
-                            //Mapping entre les frames d'une partie et les frameEntity d'une partieEntity
-                            FrameEntity frameEntity = _mapper.Map<FrameEntity>(_joueur.PartieDTO.ElementAt(i).FramesDTO.ElementAt(j));
-                            partieEntity.Frames.Add(frameEntity);
-                        }
-                        entity.PartieEntities.Add(partieEntity);
-                    }
-                    result = await _joueurRepository.Add(entity);
-                }
-                catch (Exception ex)
-                {
-                    Debug.WriteLine(ex);
-                    throw;
-                }
+                    var partieEntity = _mapper.Map<PartieEntity>(p);
+                    partieEntity.Frames=p.FramesDTO.Select(f => _mapper.Map<FrameEntity>(f)).ToList();
+                    return partieEntity;
+                }).ToList();
+                    
+                result = _mapper.Map<JoueurDTO>(await _joueurRepository.Add(entity));
+                _logger.LogInformation("A new player was added : {player}", _joueur.Pseudo);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error while adding new player : {player}", _joueur.Pseudo);
+                throw;
+            }
             return result;
         }
 
@@ -75,7 +65,18 @@ namespace BowlingService
         /// <returns></returns>
         public async Task<bool> Delete(JoueurDTO _joueur)
         {
-            return await _joueurRepository.Delete(_joueur.Id);
+            var result = false;
+            try
+            {
+                result = await _joueurRepository.Delete(_joueur.Id);
+                _logger.LogInformation("A player was deleted : {player}", _joueur.Pseudo);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error while deleting player : {player}", _joueur.Pseudo);
+                throw;
+            }
+            return result;
         }
 
         /// <summary>
@@ -84,14 +85,19 @@ namespace BowlingService
         /// <returns></returns>
         public  async Task<IEnumerable<JoueurDTO>> GetAll()
         {
-            using (var context = new BowlingContext())
+            List<JoueurDTO> joueurs = new  List<JoueurDTO>();
+            try
             {
-                List<JoueurDTO> joueurs = new  List<JoueurDTO>();
-                var data= await _joueurRepository.GetAllJoueur();
-                foreach (var item in data)
-                    joueurs.Add(_mapper.Map<JoueurDTO>(item));
-                return joueurs;
+                var joueursEntity = await _joueurRepository.GetAllJoueur();
+                joueurs = joueursEntity.Select(j => _mapper.Map<JoueurDTO>(j)).ToList();
+                _logger.LogInformation("All players were retrieved");
             }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error while retrieving all players");
+                throw;
+            }
+            return joueurs;
         }
 
         /// <summary>
@@ -101,29 +107,48 @@ namespace BowlingService
         /// <returns></returns>
         public async Task<JoueurDTO> GetDataWithName(string name)
         {
-            using (var context = new BowlingContext())
+            JoueurDTO _joueur = null;
+            
+            try
             {
-                JoueurDTO _joueur = null;
-
-                var query = _joueurRepository.GetJoueurByNom(name);
-                _joueur = _mapper.Map<JoueurDTO>(query.Result);
-                return _joueur;
+                var joueurEntity = await _joueurRepository.GetJoueurByNom(name);
+                _joueur = _mapper.Map<JoueurDTO>(joueurEntity);
+                _logger.LogInformation("Player was retrieved : {player}", name);
             }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error while retrieving player : {player}", name);
+                throw;
+            }
+            return _joueur;
         }
 
         public async Task<bool> Update(JoueurDTO _joueur)
         {
             bool result = false;
-            using (var context = new BowlingContext())
+            try
             {
                 JoueurEntity entity = _joueurRepository.GetJoueur(_joueur.Id).Result;
-                if (entity!=null)
+                if (entity!= null)
                 {
                     entity.Pseudo = _joueur.Pseudo;
-                    result = _joueurRepository.Update(entity).Result;
+                    entity.PartieEntities = _joueur.PartieDTO.Select(p =>
+                    {
+                        var partieEntity = _mapper.Map<PartieEntity>(p);
+                        partieEntity.Frames = p.FramesDTO.Select(f => _mapper.Map<FrameEntity>(f)).ToList();
+                        return partieEntity;
+                    }).ToList();
+                    result = await _joueurRepository.Update(entity);
+                    _logger.LogInformation("Player was updated : {player}", _joueur.Pseudo);
                 }
+                
+                return result;
             }
-            return result;
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error while updating player : {player}", _joueur.Pseudo);
+                throw;
+            }
         }
         #endregion
 

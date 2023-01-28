@@ -15,7 +15,7 @@ namespace BowlingEF.Entities
 
         [Required]
         public string Pseudo { get; set; }
-        public ICollection<PartieEntity> PartieEntities { get; set; } = new List<PartieEntity>();
+        public virtual ICollection<PartieEntity> PartieEntities { get; set; } = new List<PartieEntity>();
         #endregion
     }
 }
