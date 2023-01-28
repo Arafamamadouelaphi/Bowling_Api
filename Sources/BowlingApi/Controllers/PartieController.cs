@@ -127,7 +127,6 @@ namespace BowlingApi.Controllers
 
         }
 
-        // DELETE: api/Partie/5
 
     }
 }
