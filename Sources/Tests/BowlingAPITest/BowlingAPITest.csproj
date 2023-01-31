@@ -22,11 +22,13 @@
             <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
             <PrivateAssets>all</PrivateAssets>
         </PackageReference>
+        <PackageReference Include="FluentAssertions" Version="6.9.0" />
     </ItemGroup>
 
     <ItemGroup>
       <ProjectReference Include="..\..\BowlingApi\BowlingApi.csproj" />
       <ProjectReference Include="..\..\BowlingService\BowlingService.csproj" />
+      <ProjectReference Include="..\..\DTOs\DTOs.csproj" />
     </ItemGroup>
 
     <ItemGroup>
@@ -35,4 +37,7 @@
       </Reference>
     </ItemGroup>
 
+    <ItemGroup>
+      <None Remove="FluentAssertions" />
+    </ItemGroup>
 </Project>
