@@ -86,8 +86,111 @@ namespace BowlingAPITest
             okResult.Value.Should().BeEquivalentTo(parti);
         }
 
+        //post
+        [Fact]
+        public async Task Put_With_Invalid_Joueur_Should_Return_BadRequest()
+        {
+            // Arrange
+            var joueurController = new JoueurController(null);
+
+            // Act
+            var result = await joueurController.Put(null, null);
+
+            // Assert
+            result.Should().BeOfType<ActionResult<JoueurDTO>>();
+            var actionResult = result as ActionResult<JoueurDTO>;
+            actionResult.Result.Should().BeOfType<BadRequestObjectResult>();
+            var badRequestResult = actionResult.Result as BadRequestObjectResult;
+            badRequestResult.Value.Should().Be("Le joueur est obligatoire");
+        }
+
+        [Fact]
+        public async Task Put_With_Valid_parti_Should_Return_Ok_With_Joueur()
+        {
+            // Arrange
+            var parti = new PartieDTO { Id = 1, Score = 1 };
+            var partiServiceMock = new Mock<IpartieService>();
+            partiServiceMock.Setup(x => x.Update(parti)).ReturnsAsync(true);
+            var partiControlleur = new PartieController(partiServiceMock.Object);
+
+            // Act
+            var result = await partiControlleur.Put(parti.Id, parti);
+
+            // Assert
+            result.Should().BeOfType<ActionResult<PartieDTO>>();
+            var actionResult = result as ActionResult<PartieDTO>;
+            actionResult.Result.Should().BeOfType<OkObjectResult>();
+        }
+
+        //test Get_ShouldReturnNotFound
+        [Fact]
+        public async Task Get_ShouldReturnNotFound()
+        {
+            // Arrange
+            var mockService = new Mock<IpartieService>();
+            mockService.Setup(service => service.GetAll()).ReturnsAsync((List<PartieDTO>)null);
+            var controller = new PartieController(mockService.Object);
+
+            // Act
+            var result = await controller.Get();
+
+            // Assert
+            result.Should().BeOfType<NotFoundResult>();
+        }
+
+        [Fact]
+        public async Task Get_White_Name_ShouldReturnNotFound()
+        {
+            // Arrange
+
+            var partie1 = new PartieDTO { Score = 1 };
+            var mockService = new Mock<IpartieService>();
+            mockService.Setup(service => service.GetDataWithName("Jane Smith")).ReturnsAsync(partie1);
+            var controller = new PartieController(mockService.Object);
+
+            // Act
+            var result = await controller.Get("John Doe");
+
+            // Assert
+            result.Should().BeOfType<NotFoundResult>();
+        }
+        [Fact]
+        public async Task Get_ShouldReturnInternalServerError()
+        {
+            // Arrange
+            var mockService = new Mock<IpartieService>();
+            mockService.Setup(service => service.GetAll()).ThrowsAsync(new Exception());
+            var controller = new PartieController(mockService.Object);
+
+            // Act
+            var result = await controller.Get() as ObjectResult;
+
+            // Assert
+            result.Should().BeOfType<ObjectResult>();
+            result.StatusCode.Should().Be(500);
+        }
+        [Fact]
+        public async Task Post_With_Invalid_Joueur_Should_Return_BadRequest()
+        {
+            // Arrange
+            var joueurController = new JoueurController(null);
+
+            // Act
+            var result = await joueurController.Post(null);
+
+            // Assert
+            result.Should().BeOfType<ActionResult<JoueurDTO>>();
+            var actionResult = result as ActionResult<JoueurDTO>;
+            actionResult.Result.Should().BeOfType<BadRequestObjectResult>();
+            var badRequestResult = actionResult.Result as BadRequestObjectResult;
+            badRequestResult.Value.Should().Be("La partie est obligatoire");
+        }
+
+        
+
+
     }
 
-   
+
 }
 

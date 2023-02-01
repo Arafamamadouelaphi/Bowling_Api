@@ -15,7 +15,8 @@ namespace DTOs
     public class PartieDTO
     {
         #region Properties
-        
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public long Id { get; set; }
 
         public JoueurDTO Joueur { get; set; }
