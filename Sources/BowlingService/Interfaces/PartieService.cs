@@ -32,17 +32,19 @@ namespace BowlingService.Interfaces
 
         //Add
 
-        public async Task<bool> Add(PartieDTO _partie)
+
+public async Task<PartieDTO> Add(PartieDTO _partie)
         {
-            bool result = false;
+
+            PartieDTO result = null;
             using (var context = new BowlingContext())
             {
                 PartieEntity entity = _mapper.Map<PartieEntity>(_partie);
-                context.Parties.Add(entity);
+                //context.Parties.Add(entity);
                 try
                 {
-                    var data = await context.SaveChangesAsync();
-                    result = data == 1;
+                    //var data = await context.SaveChangesAsync();
+                    result =_mapper.Map<PartieDTO>(await _IpartieRepository.Add(entity));
                     _logger.LogInformation("A new player was added : {player}", _partie.Id);
 
                 }

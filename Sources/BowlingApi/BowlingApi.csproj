@@ -9,6 +9,7 @@
 
     <PropertyGroup Condition=" '$(RunConfiguration)' == 'https' " />
     <PropertyGroup Condition=" '$(RunConfiguration)' == 'http' " />
+    <PropertyGroup Condition=" '$(RunConfiguration)' == 'RestFull' " />
     <ItemGroup>
         <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="7.0.0" />
         <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
@@ -25,6 +26,9 @@
       <ProjectReference Include="..\BowlingService\BowlingService.csproj" />
       <ProjectReference Include="..\Mapper\Mapper.csproj" />
         
+      <ProjectReference Include="..\DTOs\DTOs.csproj">
+        <GlobalPropertiesToRemove></GlobalPropertiesToRemove>
+      </ProjectReference>
     </ItemGroup>
 
     <ItemGroup>
