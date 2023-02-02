@@ -11,7 +11,7 @@ namespace BowlingService.Interfaces
         public Task<bool> Update(PartieDTO _partie);
         public Task<IEnumerable<PartieDTO>> GetAll();
         public Task<IEnumerable<PartieEntity>> GetAllWithDate(DateTime date);
-        public Task<PartieDTO> GetDataWithName(string nom);
+        public Task<PartieDTO> GetDataWithId(int id);
     }
 }
 

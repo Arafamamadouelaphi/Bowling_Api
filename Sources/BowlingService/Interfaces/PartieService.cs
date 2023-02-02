@@ -104,19 +104,19 @@ public async Task<PartieDTO> Add(PartieDTO _partie)
             throw new NotImplementedException();
         }
 
-        public async Task<PartieDTO> GetDataWithName(string nom)
+        public async Task<PartieDTO> GetDataWithId(int id)
         {
             PartieDTO _partie = null;
 
             try
             {
-                var partientity = await _IpartieRepository.GetDataWithName(nom);
+                var partientity = await _IpartieRepository.GetDataWithId(id);
                 _partie = _mapper.Map<PartieDTO>(partientity);
-                _logger.LogInformation("partie was retrieved : {partie}", nom);
+                _logger.LogInformation("partie was retrieved : {partie}", id);
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Error while retrieving partie : {partie}", nom);
+                _logger.LogError(ex, "Error while retrieving partie : {partie}", id);
                 throw;
             }
             return _partie;
@@ -141,7 +141,7 @@ public async Task<PartieDTO> Add(PartieDTO _partie)
 
         }
 
-
+        
     }
 }
 

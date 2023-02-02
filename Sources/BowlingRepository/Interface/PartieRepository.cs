@@ -48,11 +48,12 @@ namespace BowlingRepository.Interface
             throw new NotImplementedException();
         }
 
-        public Task<PartieEntity> GetDataWithName(string nom)
+        public async Task<PartieEntity> GetDataWithId(int id)
         {
-            //  return await _context.Parties.FirstOrDefaultAsync(n => n == nom);
-            throw new NotImplementedException();
+            var data = await _context.Parties.FirstOrDefaultAsync(n => n.Id == id);
+            return data;
         }
+
 
         public async Task<bool> Update(PartieEntity _partie)
         {

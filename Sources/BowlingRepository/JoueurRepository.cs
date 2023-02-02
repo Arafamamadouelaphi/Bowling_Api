@@ -30,7 +30,7 @@ public class JoueurRepository:IJoueurRepository
 
     public async Task<bool> Update(JoueurEntity joueur)
     {
-        return await _context.SaveChangesAsync() > 0;
+        return await _context.SaveChangesAsync() > 0; 
     }
 
     public async Task<JoueurEntity> GetJoueur(long id)
