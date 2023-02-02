@@ -129,7 +129,7 @@ public class TestController
         var joueurController = new JoueurController(null);
 
         // Act
-        var result = await joueurController.Put(null, null);
+        var result = await joueurController.Put(0, null);
 
         // Assert
         result.Should().BeOfType<ActionResult<JoueurDTO>>();
@@ -145,11 +145,11 @@ public class TestController
         // Arrange
         var joueur = new JoueurDTO { Id = 1, Pseudo = "John Doe" };
         var joueurServiceMock = new Mock<IJoueurService>();
-        joueurServiceMock.Setup(x => x.Update(joueur)).ReturnsAsync(true);
+        joueurServiceMock.Setup(x => x.Update(joueur.Id,joueur)).ReturnsAsync(true);
         var joueurController = new JoueurController(joueurServiceMock.Object);
 
         // Act
-        var result = await joueurController.Put(joueur.Pseudo, joueur);
+        var result = await joueurController.Put(joueur.Id, joueur);
 
         // Assert
         result.Should().BeOfType<ActionResult<JoueurDTO>>();

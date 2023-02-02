@@ -7,6 +7,7 @@ namespace BowlingApi.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
+
 public class JoueurController:Controller
 {
     private IJoueurService _joueurService;
@@ -16,8 +17,17 @@ public class JoueurController:Controller
         _joueurService = joueurService;
     }
     
-    // GET: api/Joueur
+    /// <summary>
+    /// Get all Players
+    /// </summary>
+    /// <returns>la liste des Joueurs </returns>
+    /// <response code="200">Retourne la liste des joueurs</response>
+    /// <response code="404">Si la liste est vide</response>
+    /// <response code="500">Si une erreur est survenue</response>
     [HttpGet]
+    [ProducesResponseType(typeof(string), StatusCodes.Status500InternalServerError)]
+    [ProducesResponseType(typeof(string), StatusCodes.Status404NotFound)]
+    [ProducesResponseType(typeof(IEnumerable<JoueurDTO>), StatusCodes.Status200OK)]
     public async Task<IActionResult> Get()
     {
         try
@@ -36,7 +46,12 @@ public class JoueurController:Controller
         }
     }
     
-    // GET: api/Joueur/Djon
+    /// <summary>
+    /// Get a player by name
+    /// GET: api/Joueur/Djon
+    /// </summary>
+    /// <param name="name"></param>
+    /// <returns></returns>
     [HttpGet("{name}")]
     public async Task<IActionResult> Get(string name)
     {
@@ -80,21 +95,20 @@ public class JoueurController:Controller
         }
     }
     
-    [HttpPut("{name}")]
-    public async Task<ActionResult<JoueurDTO>> Put(string name,[FromBody] JoueurDTO joueur)
+    [HttpPut("{id}")]
+    public async Task<ActionResult<JoueurDTO>> Put(long id,[FromBody] JoueurDTO joueur)
     {
         try
         {
             if(joueur == null)
                 return BadRequest("Le joueur est obligatoire");
             
-            var updateJoueur = _joueurService.Update(joueur);
-            if (updateJoueur.Result == null)
+            var updateJoueur = _joueurService.Update(id,joueur);
+            if (updateJoueur.Result == false)
             {
                 return NotFound();
             }
-            
-            return Ok(updateJoueur);
+            return Ok(joueur);
         }
         catch (Exception e)
         {

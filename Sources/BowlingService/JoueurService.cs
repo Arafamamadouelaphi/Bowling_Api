@@ -123,12 +123,12 @@ namespace BowlingService
             return _joueur;
         }
 
-        public async Task<bool> Update(JoueurDTO _joueur)
+        public async Task<bool> Update(long id,JoueurDTO _joueur)
         {
             bool result = false;
             try
             {
-                JoueurEntity entity = _joueurRepository.GetJoueur(_joueur.Id).Result;
+                JoueurEntity entity = _joueurRepository.GetJoueur(id).Result;
                 if (entity!= null)
                 {
                     entity.Pseudo = _joueur.Pseudo;
