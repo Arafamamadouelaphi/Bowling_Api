@@ -19,6 +19,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(c=>
 {
     c.SwaggerDoc("v1", new() { Title = "APi Bowling APP", Version = "v1" });
+    c.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, "BowlingApi.xml"));
 });
 builder.Services.AddAutoMapper(typeof(JoueurProfile));
 builder.Services.AddScoped<IJoueurService, JoueurService>();
