@@ -17,6 +17,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(c=>
 {
     c.SwaggerDoc("v1", new() { Title = "APi Bowling APP", Version = "v1" });
+    c.SwaggerDoc("v2", new() { Title = "APi Bowling APP", Version = "v2" });
     c.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, "BowlingApi.xml"));
 });
 builder.Services.AddAutoMapper(typeof(JoueurProfile));
@@ -52,6 +53,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI(c =>
     {
         c.SwaggerEndpoint("/swagger/v1/swagger.json", "API du projet Bowling APP v1");
+        c.SwaggerEndpoint("/swagger/v2/swagger.json", "API du projet Bowling APP v2");
         
     });
 }

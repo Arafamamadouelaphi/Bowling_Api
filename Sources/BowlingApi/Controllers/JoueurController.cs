@@ -5,9 +5,9 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace BowlingApi.Controllers;
 
+[ApiVersion("1.0")]
 [ApiController]
-[Route("api/[controller]")]
-
+[Route("api/v{version:apiVersion}/[controller]")]
 public class JoueurController:Controller
 {
     private IJoueurService _joueurService;
@@ -55,7 +55,6 @@ public class JoueurController:Controller
     /// <response code="200">Retourne la liste des joueurs</response>
     /// <response code="404">Si la liste est vide</response>
     /// <response code="500">Si une erreur est survenue</response>
-    
     [HttpGet("{page}/{pageSize}")] 
     [ProducesResponseType(typeof(string), StatusCodes.Status500InternalServerError)]
     [ProducesResponseType(typeof(string), StatusCodes.Status404NotFound)]
