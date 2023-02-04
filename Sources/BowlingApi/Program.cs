@@ -1,11 +1,8 @@
-using AutoMapper;
 using BowlingEF.Context;
-using BowlingLib.Model;
 using BowlingRepository;
 using BowlingRepository.Interface;
 using BowlingService;
 using BowlingService.Interfaces;
-using Business;
 using Mapper;
 using Microsoft.EntityFrameworkCore;
 
