@@ -35,7 +35,8 @@ public class JoueurRepository:IJoueurRepository
 
     public async Task<JoueurEntity> GetJoueur(long id)
     {
-        return await _context.Joueurs.FindAsync(id);
+        var data= await _context.Joueurs.FindAsync(id);
+        return data;
     }
 
     public async Task<IEnumerable<JoueurEntity>> GetAllJoueur()
