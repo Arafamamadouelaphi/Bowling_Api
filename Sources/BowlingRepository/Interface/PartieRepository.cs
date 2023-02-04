@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace BowlingRepository.Interface
 {
-	public class PartieRepository:IpartieRepository
+    public class PartieRepository : IpartieRepository
     {
         private readonly BowlingContext _context;
         public PartieRepository()
@@ -13,25 +13,30 @@ namespace BowlingRepository.Interface
             _context = new BowlingContext();
         }
 
-        public async Task<bool> Add(PartieEntity partie)
+        public async Task<PartieEntity> Add(PartieEntity partie)
         {
-            _context.Parties.Add( partie);
-            return await _context.SaveChangesAsync() > 0;
+
+            var result = await _context.Parties.AddAsync(partie);
+            await _context.SaveChangesAsync();
+            return result.Entity;
+
+            //_context.Parties.Add( partie);
+            //return await _context.SaveChangesAsync() > 0;
 
 
         }
 
-        public async Task<bool> Delete(PartieEntity _partie)
+        public async Task<bool> Delete(long id)
         {
             using (var context = new BowlingContext())
             {
-                PartieEntity entity = context.Parties.Find(_partie.Id);
+                PartieEntity entity = context.Parties.Find(id);
                 context.Parties.Remove(entity);
                 return await context.SaveChangesAsync() > 0;
             }
         }
 
-      
+
 
         public async Task<List<PartieEntity>> GetAll()
         {
@@ -43,11 +48,12 @@ namespace BowlingRepository.Interface
             throw new NotImplementedException();
         }
 
-        public Task<PartieEntity> GetDataWithName(string nom)
+        public async Task<PartieEntity> GetDataWithId(int id)
         {
-            //  return await _context.Parties.FirstOrDefaultAsync(n => n == nom);
-            throw new NotImplementedException();
+            var data = await _context.Parties.FirstOrDefaultAsync(n => n.Id == id);
+            return data;
         }
+
 
         public async Task<bool> Update(PartieEntity _partie)
         {
@@ -55,4 +61,5 @@ namespace BowlingRepository.Interface
         }
     }
 }
+
 

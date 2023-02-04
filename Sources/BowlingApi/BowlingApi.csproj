@@ -9,8 +9,9 @@
 
     <PropertyGroup Condition=" '$(RunConfiguration)' == 'https' " />
     <PropertyGroup Condition=" '$(RunConfiguration)' == 'http' " />
+    <PropertyGroup Condition=" '$(RunConfiguration)' == 'RestFull' " />
     <ItemGroup>
-        <!--<PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="7.0.0" />-->
+        <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="7.0.0" />
         <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
         <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.11" />
         <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.13" />
@@ -25,6 +26,9 @@
       <ProjectReference Include="..\BowlingService\BowlingService.csproj" />
       <ProjectReference Include="..\Mapper\Mapper.csproj" />
         
+      <ProjectReference Include="..\DTOs\DTOs.csproj">
+        <GlobalPropertiesToRemove></GlobalPropertiesToRemove>
+      </ProjectReference>
     </ItemGroup>
 
     <ItemGroup>
@@ -33,5 +37,4 @@
       <None Remove="Microsoft.EntityFrameworkCore.Tools" />
       <None Remove="Microsoft.EntityFrameworkCore.Sqlite" />
     </ItemGroup>
-
 </Project>

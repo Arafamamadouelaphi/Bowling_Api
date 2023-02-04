@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Xml.Linq;
 using AutoMapper;
 using BowlingEF.Context;
 using BowlingEF.Entities;
@@ -7,51 +8,74 @@ using BowlingRepository;
 using BowlingRepository.Interface;
 using DTOs;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 
 namespace BowlingService.Interfaces
 {
-	public class PartieService:IpartieService
-	{
+    public class PartieService : IpartieService
+    {
         private readonly IpartieRepository _IpartieRepository;
+        private readonly ILogger<JoueurService> _logger;
+        private readonly IMapper _mapper;
 
-        public PartieService(IpartieRepository ipartieRepository, IMapper mapper)
+        public PartieService(IpartieRepository ipartieRepository, IMapper mapper, ILogger<JoueurService> logger)
         {
             _IpartieRepository = ipartieRepository;
             _mapper = mapper;
+            _logger = logger;
         }
 
         public PartieService()
-		{
-
-		}
-        private readonly IMapper _mapper;
-
-        public async Task<bool> Add(PartieDTO _partie)
         {
-            bool result = false;
+
+        }
+
+        //Add
+
+
+public async Task<PartieDTO> Add(PartieDTO _partie)
+        {
+
+            PartieDTO result = null;
             using (var context = new BowlingContext())
             {
                 PartieEntity entity = _mapper.Map<PartieEntity>(_partie);
-                context.Parties.Add(entity);
+                //context.Parties.Add(entity);
                 try
                 {
-                    var data = await context.SaveChangesAsync();
-                    result = data == 1;
+                    //var data = await context.SaveChangesAsync();
+                    result =_mapper.Map<PartieDTO>(await _IpartieRepository.Add(entity));
+                    _logger.LogInformation("A new player was added : {player}", _partie.Id);
+
                 }
                 catch (Exception ex)
                 {
-                    Console.WriteLine(ex);
+                    _logger.LogError(ex, "Error while adding new player : {player}", _partie.Id);
                     throw;
                 }
             }
 
             return result;
         }
+        //Delete
 
-
-        public async Task<bool> Delete(PartieEntity _partie)
+        public async Task<bool> Delete(PartieDTO _partie)
         {
-            return await _IpartieRepository.Delete(_partie);
+            // return await _IpartieRepository.Delete(_partie.Id);
+
+            var result = false;
+            try
+            {
+                result = await _IpartieRepository.Delete(_partie.Id);
+                _logger.LogInformation("la partie est supprimer", _partie.Id);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error while deleting player : {player}", _partie.Id);
+                throw;
+            }
+            return result;
+
         }
 
         public async Task<IEnumerable<PartieDTO>> GetAll()
@@ -80,20 +104,45 @@ namespace BowlingService.Interfaces
             throw new NotImplementedException();
         }
 
-        public Task<PartieEntity> GetDataWithName(string nom)
+        public async Task<PartieDTO> GetDataWithId(int id)
         {
-            throw new NotImplementedException();
+            PartieDTO _partie = null;
+
+            try
+            {
+                var partientity = await _IpartieRepository.GetDataWithId(id);
+                _partie = _mapper.Map<PartieDTO>(partientity);
+                _logger.LogInformation("partie was retrieved : {partie}", id);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error while retrieving partie : {partie}", id);
+                throw;
+            }
+            return _partie;
         }
 
-        public Task<bool> Update(PartieEntity _partie)
+
+        //Update
+
+        public async Task<bool> Update(PartieDTO _partie)
         {
-            throw new NotImplementedException();
+
+            bool result = false;
+            using (var context = new BowlingContext())
+            {
+                PartieEntity entity = _mapper.Map<PartieEntity>(_partie);
+                entity.Date = _partie.Date;
+                entity.Score = _partie.Score;
+                result = _IpartieRepository.Update(entity).Result;
+
+            }
+            return result;
+
         }
 
-        public Task<bool> Add(PartieEntity _partie)
-        {
-            throw new NotImplementedException();
-        }
+        
     }
 }
+
 

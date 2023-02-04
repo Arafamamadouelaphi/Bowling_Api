@@ -1,7 +1,10 @@
 using System;
+using DTOs;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using BowlingEF.Entities;
+using BowlingLib.Model;
 using BowlingService;
 using BowlingService.Interfaces;
 using Microsoft.AspNetCore.Http;
@@ -29,35 +32,103 @@ namespace BowlingApi.Controllers
 
         // GET: api/Partie
         [HttpGet]
-        public  IActionResult Get()
+        public async Task<IActionResult> Get()
         {
-            var result =  _partieService.GetAll().Result;
-            return Ok(result);
+            try
+            {
+                var result = await _partieService.GetAll();
+                if (result == null)
+                {
+                    return NotFound();
+                }
+                return Ok(result);
+            }
+            catch (Exception e)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, e.Message);
+                throw;
+            }
+            //var result =  _partieService.GetAll().Result;
+            //return Ok(result);
         }
 
-        // GET: api/Partie/5
-        [HttpGet("{name}")]
-        public IActionResult Get(string name)
+        // GET: api/Partie/djon
+        [HttpGet("{id}")]
+        public async Task<IActionResult> Get(int id)
         {
-            return Ok(_partieService.GetDataWithName(name));
+            //  return Ok(_partieService.GetDataWithName(name));
+
+
+            try
+            {
+                if (id == null)
+                    return BadRequest("Le nom de la partie  est obligatoire");
+
+                var result = _partieService.GetDataWithId(id).Result;
+                if (result == null)
+                {
+                    return NotFound();
+                }
+                return Ok(result);
+            }
+            catch (Exception e)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, e.Message);
+                throw;
+            }
+
         }
 
         // POST: api/Partie
         [HttpPost]
-        public void Post([FromBody] string value)
+        public async Task<ActionResult<PartieDTO>> Post([FromBody] PartieDTO parti)
         {
+
+
+            try
+            {
+                if (parti == null)
+                {
+                    return BadRequest("partie est obligatoire");
+                }
+                var createdpartie = _partieService.Add(parti).Result;
+                return CreatedAtAction(nameof(Get), new { id = parti.Id }, createdpartie);
+
+            }
+            catch (Exception e)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, e.Message);
+                throw;
+            }
+
         }
 
         // PUT: api/Partie/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public async Task<ActionResult<PartieDTO>> Put(string name, [FromBody] PartieDTO partie)
         {
+            try
+            {
+                if (partie == null)
+                    return BadRequest("La partie est obligatoire");
+
+                var updatepartie = _partieService.Update(partie);
+                if (updatepartie.Result == null)
+                {
+                    return NotFound();
+                }
+
+                return Ok(updatepartie);
+            }
+            catch (Exception e)
+            {
+                StatusCode(StatusCodes.Status500InternalServerError, e.Message);
+                throw;
+            }
+
         }
 
-        // DELETE: api/Partie/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
-        }
+
     }
 }
+

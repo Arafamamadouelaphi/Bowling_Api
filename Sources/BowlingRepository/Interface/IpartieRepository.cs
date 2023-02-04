@@ -5,12 +5,12 @@ namespace BowlingRepository.Interface
 {
 	public interface IpartieRepository
     {
-      public  Task<bool> Add(PartieEntity _partie);
-      public  Task<bool> Delete(PartieEntity _partie);
+      public  Task<PartieEntity> Add(PartieEntity _partie);
+      public  Task<bool> Delete(long id);
       public Task<bool> Update(PartieEntity _partie);
       public Task<List<PartieEntity>> GetAll();
       public Task<IEnumerable<PartieEntity>> GetAllWithDate(DateTime date);
-      public Task<PartieEntity> GetDataWithName(string nom);
+      public Task<PartieEntity> GetDataWithId(int id);
         
     }
 }

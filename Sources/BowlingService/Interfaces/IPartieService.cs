@@ -4,14 +4,14 @@ using DTOs;
 
 namespace BowlingService.Interfaces
 {
-	public interface IpartieService
+    public interface IpartieService
     {
-        public Task<bool> Add(PartieEntity _partie);
-        public Task<bool> Delete(PartieEntity _partie);
-        public Task<bool> Update(PartieEntity _partie);
+        public Task<PartieDTO> Add(PartieDTO _partie);
+        public Task<bool> Delete(PartieDTO _partie);
+        public Task<bool> Update(PartieDTO _partie);
         public Task<IEnumerable<PartieDTO>> GetAll();
         public Task<IEnumerable<PartieEntity>> GetAllWithDate(DateTime date);
-        public Task<PartieEntity> GetDataWithName(string nom);
+        public Task<PartieDTO> GetDataWithId(int id);
     }
 }
 
