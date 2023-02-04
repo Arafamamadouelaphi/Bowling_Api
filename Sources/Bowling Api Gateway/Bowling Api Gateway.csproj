@@ -4,7 +4,7 @@
         <TargetFramework>net6.0</TargetFramework>
         <Nullable>enable</Nullable>
         <ImplicitUsings>enable</ImplicitUsings>
-        <RootNamespace>API_Gateway</RootNamespace>
+        <RootNamespace>Bowling_Api_Gateway</RootNamespace>
     </PropertyGroup>
 
     <ItemGroup>
@@ -12,13 +12,11 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Content Remove="ocelot.json" />
-    </ItemGroup>
-    <ItemGroup>
-      <EmbeddedResource Include="ocelot.json" Condition="'$(ExcludeConfigFilesFromBuildOutput)'!='true'">
+      <EmbeddedResource Include="ocelot.json">
         <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       </EmbeddedResource>
     </ItemGroup>
+
 </Project>

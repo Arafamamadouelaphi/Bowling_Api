@@ -106,7 +106,7 @@ public class TestController
     public async Task Post_With_Valid_Joueur_Should_Return_Created_With_Joueur()
     {
         // Arrange
-        var joueur = new JoueurDTO { Id = 1, Pseudo = "John Doe" };
+        var joueur = new JoueurDTO {  Pseudo = "John Doe" };
         var joueurServiceMock = new Mock<IJoueurService>();
         joueurServiceMock.Setup(x => x.Add(joueur)).ReturnsAsync(joueur);
         var joueurController = new JoueurController(joueurServiceMock.Object);
@@ -120,6 +120,7 @@ public class TestController
         actionResult.Result.Should().BeOfType<CreatedAtActionResult>();
         var createdResult = actionResult.Result as CreatedAtActionResult;
         createdResult.Value.Should().BeEquivalentTo(joueur);
+        Assert.Equal(createdResult.Value, joueur);
     }
 
     [Fact]
