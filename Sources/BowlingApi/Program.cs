@@ -5,6 +5,7 @@ using BowlingRepository.Interface;
 using BowlingService;
 using BowlingService.Interfaces;
 using Mapper;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -19,7 +20,15 @@ builder.Services.AddSwaggerGen(c=>
     c.SwaggerDoc("v1", new() { Title = "APi Bowling APP", Version = "v1" });
     c.SwaggerDoc("v2", new() { Title = "APi Bowling APP", Version = "v2" });
     c.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, "BowlingApi.xml"));
+    
 });
+
+builder.Services.AddVersionedApiExplorer(options =>
+{
+    options.GroupNameFormat = "'v'VVV";
+    options.SubstituteApiVersionInUrl = true;
+});
+
 builder.Services.AddAutoMapper(typeof(JoueurProfile));
 builder.Services.AddScoped<IJoueurService, JoueurService>();
 
@@ -32,6 +41,13 @@ builder.Services.AddDbContext<BowlingContext>(options =>
 builder.Services.AddScoped<IJoueurRepository, JoueurRepository>();
 builder.Services.AddScoped<IpartieRepository, PartieRepository>();
 builder.Services.AddScoped<IpartieService, PartieService>();
+
+builder.Services.AddApiVersioning(config =>
+{
+    config.DefaultApiVersion = new ApiVersion(1, 0);
+    config.AssumeDefaultVersionWhenUnspecified = true;
+    config.ReportApiVersions = true;
+});
 
 
 
