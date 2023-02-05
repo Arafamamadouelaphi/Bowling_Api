@@ -12,30 +12,26 @@
 [![Vulnerabilities](https://codefirst.iut.uca.fr/sonar/api/project_badges/measure?project=BowlingScoreApp&metric=vulnerabilities&token=d89d41f6a247037395d41fe6f40f53a402943bd9)](https://codefirst.iut.uca.fr/sonar/dashboard?id=BowlingScoreApp)  
  
  
-# BowlingScoreApp
-
-Welcome on the BowlingScoreApp project!  
+# Bowling Score API
 
 
 <img src="Documentation/doc_images/bowling-157933.png" height=40/>   
 
 ## Description
 
-Ce projet est une application de gestion de score de bowling.
-l'application vas permettre de:
-
-* Gérer les scores de plusieurs joueurs en même temps.
-* Gérer les matchs en équipe, en individuel ou en solo.
-* consulter les statistiques des joueurs.
-* consulter les statistiques des matchs.
-* Consulter l'historique des matchs.
+Cette API fournit des services pour gérer les scores d'un jeu de bowling.
+Elle permet de créer des joueurs, des parties et de gérer les scores de chaque joueur pour chaque partie.
+Elle permet également de consulter les scores de chaque joueur pour chaque partie.
+Le projet est développé en C# avec le framework .NET Core 6.0.
+la documentation de l'API est disponible à l'adresse suivante : https://codefirst.iut.uca.fr/swagger/index.html
+et est constituée de 2 API (API RestFull et GraphQL) qui qui sont manager par une API Gateway.
 
 
 ## Installation
 
 ### Requirements
 
-* C# 8.0
+* C# 10.0
 * .NET Core 6.0
 * Visual Studio 2022
 * Entity Framework Core 6.0
@@ -44,7 +40,7 @@ l'application vas permettre de:
 
 ### Clone
 
-Clone this repo to your local machine using `https://codefirst.iut.uca.fr/git/victor_perez.ngounou/BowlingScoreApp.git`
+Clone this repo to your local machine using 'https://codefirst.iut.uca.fr/git/victor_perez.ngounou/ApiBowlingProject.git'
 
 * [Git](https://git-scm.com) - Download and Install Git.
 * [Visual Studio](https://visualstudio.microsoft.com/fr/) - Download and Install Visual Studio.
@@ -61,14 +57,11 @@ $ dotnet tool install --global dotnet-ef
 ### Setup
 
 * Ouvrir le projet dans Visual Studio.
-* Lancez le projet en mode debug.
-* Dans le menu déroulant, sélectionnez "BowlingApp" puis "Package Manager Console".
-* Dans la console, tapez la commande suivante:
-
-```shell
-$ dotnet ef database update 
-```
-
+* Configurer l'exécution de l'application en mode "Multiple startup projects" et sélectionner les projets suivants :
+    * BowlingApi
+    * Bowling Api Gateway
+    * GraphQL Project
+* Build le projet.
 * L'application est prête à être utilisée.
 
 ## Usage
@@ -81,7 +74,6 @@ $ dotnet ef database update
 
 * [Victor Perez NGOUNOU](https://codefirst.iut.uca.fr/git/victor_perez.ngounou)
 * [Mamadou Elaphi ARAFA](https://codefirst.iut.uca.fr/git/mamadou_elaphi.arafa)
-* [Augustin AFFOGNON](https://codefirst.iut.uca.fr/git/augustin.affognon)
 
 
 ## Support
