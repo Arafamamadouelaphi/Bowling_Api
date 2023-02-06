@@ -113,6 +113,7 @@ public class JoueurController:Controller
             if (result == null)
             {
                 return NotFound();
+                
             }
 
             if (name != null)
