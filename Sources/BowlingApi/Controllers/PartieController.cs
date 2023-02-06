@@ -105,7 +105,7 @@ namespace BowlingApi.Controllers
 
         // PUT: api/Partie/5
         [HttpPut("{id}")]
-        public async Task<ActionResult<PartieDTO>> Put(string name, [FromBody] PartieDTO partie)
+        public async Task<ActionResult<PartieDTO>> Put(long id, [FromBody] PartieDTO partie)
         {
             try
             {
