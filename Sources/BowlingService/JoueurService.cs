@@ -63,17 +63,17 @@ namespace BowlingService
         /// </summary>
         /// <param name="_joueur"></param>
         /// <returns></returns>
-        public async Task<bool> Delete(JoueurDTO _joueur)
+        public async Task<bool> Delete(long _joueurId)
         {
             var result = false;
             try
             {
-                result = await _joueurRepository.Delete(_joueur.Id);
-                _logger.LogInformation("A player was deleted : {player}", _joueur.Pseudo);
+                result = await _joueurRepository.Delete(_joueurId);
+                _logger.LogInformation("A player was deleted : {player}", _joueurId);
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Error while deleting player : {player}", _joueur.Pseudo);
+                _logger.LogError(ex, "Error while deleting player : {player}", _joueurId);
                 throw;
             }
             return result;
