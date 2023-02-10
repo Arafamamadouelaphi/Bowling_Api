@@ -91,15 +91,13 @@ namespace BowlingAPITest
 
 
         [Fact]
-        public async Task Put_With_Valid_parti_Should_Return_Ok_With_parti()
-        [Fact]
         public async Task Put_With_Invalid_Joueur_Should_Return_BadRequest()
         {
             // Arrange
             var joueurController = new JoueurController(null);
 
             // Act
-            var result = await joueurController.Put(null, null);
+            var result = await joueurController.Put(0, null);
 
             // Assert
             result.Should().BeOfType<ActionResult<JoueurDTO>>();
@@ -217,7 +215,7 @@ namespace BowlingAPITest
             var actionResult = result as ActionResult<JoueurDTO>;
             actionResult.Result.Should().BeOfType<BadRequestObjectResult>();
             var badRequestResult = actionResult.Result as BadRequestObjectResult;
-            badRequestResult.Value.Should().Be("La partie est obligatoire");
+            badRequestResult.Value.Should().Be("Le joueur est obligatoire");
         }
 
         

@@ -162,16 +162,7 @@ namespace BowlingApi.Controllers
             }
 
         }
-
-        public Task Put(int? score, PartieDTO partie)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task Put(long id, PartieDTO parti)
-        {
-            throw new NotImplementedException();
-        }
+       
     }
 }
 
