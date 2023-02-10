@@ -7,6 +7,7 @@ using BowlingEF.Entities;
 using BowlingLib.Model;
 using BowlingService;
 using BowlingService.Interfaces;
+using DTOs;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -162,7 +163,15 @@ namespace BowlingApi.Controllers
 
         }
 
+        public Task Put(int? score, PartieDTO partie)
+        {
+            throw new NotImplementedException();
+        }
 
+        public Task Put(long id, PartieDTO parti)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
 

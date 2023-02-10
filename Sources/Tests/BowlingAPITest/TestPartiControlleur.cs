@@ -92,6 +92,25 @@ namespace BowlingAPITest
 
         [Fact]
         public async Task Put_With_Valid_parti_Should_Return_Ok_With_parti()
+        [Fact]
+        public async Task Put_With_Invalid_Joueur_Should_Return_BadRequest()
+        {
+            // Arrange
+            var joueurController = new JoueurController(null);
+
+            // Act
+            var result = await joueurController.Put(null, null);
+
+            // Assert
+            result.Should().BeOfType<ActionResult<JoueurDTO>>();
+            var actionResult = result as ActionResult<JoueurDTO>;
+            actionResult.Result.Should().BeOfType<BadRequestObjectResult>();
+            var badRequestResult = actionResult.Result as BadRequestObjectResult;
+            badRequestResult.Value.Should().Be("Le joueur est obligatoire");
+        }
+
+        [Fact]
+        public async Task Put_With_Valid_parti_Should_Return_Ok_With_Joueur()
         {
             // Arrange
             var parti = new PartieDTO { Id = 1, Score = 1 };
@@ -184,6 +203,24 @@ namespace BowlingAPITest
 
 
 
+        [Fact]
+        public async Task Post_With_Invalid_Joueur_Should_Return_BadRequest()
+        {
+            // Arrange
+            var joueurController = new JoueurController(null);
+
+            // Act
+            var result = await joueurController.Post(null);
+
+            // Assert
+            result.Should().BeOfType<ActionResult<JoueurDTO>>();
+            var actionResult = result as ActionResult<JoueurDTO>;
+            actionResult.Result.Should().BeOfType<BadRequestObjectResult>();
+            var badRequestResult = actionResult.Result as BadRequestObjectResult;
+            badRequestResult.Value.Should().Be("La partie est obligatoire");
+        }
+
+        
 
 
     }
