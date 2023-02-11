@@ -73,7 +73,7 @@ steps:
   - name: deploy-container
     image: hub.codefirst.iut.uca.fr/thomas.bellembois/codefirst-dockerproxy-clientdrone:latest
     environment:
-      IMAGENAME: hub.codefirst.iut.uca.fr/victor_perez.ngounou/bowling-api-rest:latest
+      IMAGENAME: hub.codefirst.iut.uca.fr/victor_perez.ngounou/bowling-api-rest
       CONTAINERNAME: bowling-api-rest:latest
       COMMAND: create
       OVERWRITE: true
