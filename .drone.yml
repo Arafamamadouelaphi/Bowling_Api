@@ -45,7 +45,7 @@ steps:
   - name: docker-build-and-push-api-rest
     image: plugins/docker
     settings:
-      dockerfile: Sources/BowlingApi/Dockerfile
+      dockerfile: Sources/DockerfileRestFull
       context: Sources
       registry: hub.codefirst.iut.uca.fr
       repo: hub.codefirst.iut.uca.fr/victor_perez.ngounou/BowlingGameAPI
