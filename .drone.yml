@@ -45,7 +45,7 @@ steps:
   - name: docker-build-and-push-api-rest
     image: plugins/docker
     settings:
-      dockerfile: Sources/BowlingAPI/Dockerfile
+      dockerfile: Sources/BowlingApi/Dockerfile
       context: .
       registry: hub.codefirst.iut.uca.fr
       repo: hub.codefirst.iut.uca.fr/victor_perez.ngounou/BowlingGameAPI
@@ -58,7 +58,7 @@ steps:
   - name: docker-build-and-push-api-gateway
     image: plugins/docker
     settings:
-      dockerfile: Sources/"Bowling Api Gateway"/Dockerfile
+      dockerfile: Sources/Bowling Api Gateway/Dockerfile
       context: .
       registry: hub.codefirst.iut.uca.fr
       repo: hub.codefirst.iut.uca.fr/victor_perez.ngounou/BowlingGameAPI
