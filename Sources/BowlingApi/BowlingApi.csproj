@@ -5,6 +5,7 @@
         <Nullable>enable</Nullable>
         <ImplicitUsings>enable</ImplicitUsings>
         <LangVersion>10</LangVersion>
+        <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
     </PropertyGroup>
 
     <PropertyGroup Condition=" '$(RunConfiguration)' == 'https' " />
@@ -42,6 +43,12 @@
       <None Remove="Microsoft.EntityFrameworkCore.SqlServer" />
       <None Remove="Microsoft.EntityFrameworkCore.Tools" />
       <None Remove="Microsoft.EntityFrameworkCore.Sqlite" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Content Include="..\.dockerignore">
+        <Link>.dockerignore</Link>
+      </Content>
     </ItemGroup>
 
 </Project>

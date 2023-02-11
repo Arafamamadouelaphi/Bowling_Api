@@ -33,13 +33,49 @@ steps:
       - name: docs
         path: /docs
     commands:
-      #- cd Documentation/doxygen
-      #- doxygen Doxyfile
+      - cd Documentation/doxygen
+      - doxygen Doxyfile
       - /entrypoint.sh
     when:
       branch:
         - master
     depends_on: [ build ]
+    
+  # docker image build
+  - name: docker-build-and-push-api-rest
+    image: plugins/docker
+    settings:
+      dockerfile: Sources/BowlingAPI/Dockerfile
+      context: .
+      registry: hub.codefirst.iut.uca.fr
+      repo: hub.codefirst.iut.uca.fr/victor_perez.ngounou/BowlingGameAPI
+      username:
+        from_secret: SECRET_REGISTRY_USERNAME
+      password:
+        from_secret: SECRET_REGISTRY_PASSWORD
+      depends_on: [ build ]
+
+  - name: docker-build-and-push-api-gateway
+    image: plugins/docker
+    settings:
+      dockerfile: Sources/"Bowling Api Gateway"/Dockerfile
+      context: .
+      registry: hub.codefirst.iut.uca.fr
+      repo: hub.codefirst.iut.uca.fr/victor_perez.ngounou/BowlingGameAPI
+      username:
+        from_secret: SECRET_REGISTRY_USERNAME
+      password:
+        from_secret: SECRET_REGISTRY_PASSWORD
+      depends_on: [ build ]
+        
+  # container deployment
+  #- name: deploy-container
+   # image: hub.codefirst.iut.uca.fr/thomas.bellembois/codefirst-dockerproxy-clientdrone:latest
+    #environment:
+     # IMAGENAME: hub.codefirst.iut.uca.fr/victor_perez.ngounou/BowlingGameAPI:latest
+      #CONTAINERNAME: my_container_name
+      #COMMAND: create
+      #OVERWRITE: true
 
 volumes:
 - name: docs
