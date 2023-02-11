@@ -56,6 +56,7 @@ builder.Services.AddLogging(configure =>
 {
     configure.AddConsole();
     configure.AddDebug();
+    configure.AddEventSourceLogger();
 });
 
 var app = builder.Build();

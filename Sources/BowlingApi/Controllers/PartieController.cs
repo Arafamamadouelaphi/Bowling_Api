@@ -66,15 +66,12 @@ namespace BowlingApi.Controllers
 
         // GET: api/Partie/djon
         [HttpGet("{id}")]
-        public async Task<IActionResult> Get(int id)
+        public async Task<IActionResult> Get(long id)
         {
-            //  return Ok(_partieService.GetDataWithName(name));
-
-
             try
             {
-                if (id == null)
-                    return BadRequest("Le nom de la partie  est obligatoire");
+                if (id <= 0)
+                    return BadRequest("id est obligatoire");
 
                 var result = _partieService.GetDataWithId(id).Result;
                 if (result == null)
