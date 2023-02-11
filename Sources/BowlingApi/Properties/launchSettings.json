@@ -27,13 +27,6 @@
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
-    "RestFull": {
-      "commandName": "Project",
-      "applicationUrl": "https://localhost:5001",
-      "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development"
-      }
-    },
     "IIS Express": {
       "commandName": "IISExpress",
       "launchBrowser": true,
