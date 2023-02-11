@@ -4,6 +4,9 @@ using DTOs;
 
 namespace Mapper;
 
+/// <summary>
+/// Profile de mapping entre les PartieDTOs et les PartieEntity
+/// </summary>
 public class PartieProfile:Profile
 {
     public PartieProfile()
