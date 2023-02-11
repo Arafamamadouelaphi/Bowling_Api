@@ -53,7 +53,8 @@ steps:
         from_secret: SECRET_REGISTRY_USERNAME
       password:
         from_secret: SECRET_REGISTRY_PASSWORD
-      depends_on: [ build ]
+      #depends_on: [ build ]
+
 
   - name: docker-build-and-push-api-gateway
     image: plugins/docker
@@ -66,7 +67,7 @@ steps:
         from_secret: SECRET_REGISTRY_USERNAME
       password:
         from_secret: SECRET_REGISTRY_PASSWORD
-      depends_on: [ build ]
+     # depends_on: [ build ]
         
   # container deployment
   #- name: deploy-container
