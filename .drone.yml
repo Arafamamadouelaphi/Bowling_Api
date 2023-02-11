@@ -46,7 +46,7 @@ steps:
     image: plugins/docker
     settings:
       dockerfile: Sources/BowlingApi/Dockerfile
-      context: .
+      context: Sources
       registry: hub.codefirst.iut.uca.fr
       repo: hub.codefirst.iut.uca.fr/victor_perez.ngounou/BowlingGameAPI
       username:
