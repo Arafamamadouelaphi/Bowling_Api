@@ -69,7 +69,12 @@ namespace BowlingService
             try
             {
                 result = await _joueurRepository.Delete(_joueurId);
-                _logger.LogInformation("A player was deleted : {player}", _joueurId);
+                
+                if (result)
+                    _logger.LogInformation("A player was deleted : {player}", _joueurId);
+                else
+                    _logger.LogWarning("A player not found : {player}", _joueurId);
+                
             }
             catch (Exception ex)
             {

@@ -104,7 +104,7 @@ public async Task<PartieDTO> Add(PartieDTO _partie)
             throw new NotImplementedException();
         }
 
-        public async Task<PartieDTO> GetDataWithId(int id)
+        public async Task<PartieDTO> GetDataWithId(long id)
         {
             PartieDTO _partie = null;
 
@@ -129,19 +129,29 @@ public async Task<PartieDTO> Add(PartieDTO _partie)
         {
 
             bool result = false;
-            using (var context = new BowlingContext())
+            try
             {
-                PartieEntity entity = _mapper.Map<PartieEntity>(_partie);
+                PartieEntity entity=await _IpartieRepository.GetDataWithId(_partie.Id);
                 entity.Date = _partie.Date;
                 entity.Score = _partie.Score;
-                result = _IpartieRepository.Update(entity).Result;
-
+                result = await _IpartieRepository.Update(entity);
+                if (result)
+                {
+                    _logger.LogInformation("partie was updated : {partie}", _partie.Id);
+                }
+                else
+                {
+                    _logger.LogInformation("partie was not updated : {partie}", _partie.Id);
+                }
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error while updating player : {player}", _partie.Id);
+                throw;
             }
             return result;
 
         }
-
-        
     }
 }
 

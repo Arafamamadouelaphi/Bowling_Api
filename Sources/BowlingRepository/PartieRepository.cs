@@ -48,7 +48,7 @@ namespace BowlingRepository.Interface
             throw new NotImplementedException();
         }
 
-        public async Task<PartieEntity> GetDataWithId(int id)
+        public async Task<PartieEntity> GetDataWithId(long id)
         {
             var data = await _context.Parties.FirstOrDefaultAsync(n => n.Id == id);
             return data;

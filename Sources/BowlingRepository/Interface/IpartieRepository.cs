@@ -10,7 +10,7 @@ namespace BowlingRepository.Interface
       public Task<bool> Update(PartieEntity _partie);
       public Task<List<PartieEntity>> GetAll();
       public Task<IEnumerable<PartieEntity>> GetAllWithDate(DateTime date);
-      public Task<PartieEntity> GetDataWithId(int id);
+      public Task<PartieEntity> GetDataWithId(long id);
         
     }
 }

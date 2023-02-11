@@ -40,10 +40,19 @@ public class JoueurRepository:IJoueurRepository
     public async Task<bool> Delete(long id)
     {
         JoueurEntity entity = _context.Joueurs.Find(id);
+        if (entity == null)
+        {
+            return false;
+        }
         _context.Joueurs.Remove(entity);
         return await _context.SaveChangesAsync() > 0;
     }
-
+    
+    /// <summary>
+    /// Methode pour mettre à jour un joueur de la base de données
+    /// </summary>
+    /// <param name="joueur"></param>
+    /// <returns></returns>
     public async Task<bool> Update(JoueurEntity joueur)
     {
         return await _context.SaveChangesAsync() > 0; 

@@ -57,12 +57,64 @@ $ dotnet tool install --global dotnet-ef
 ### Setup
 
 * Ouvrir le projet dans Visual Studio.
+
+#### pour l'API Gateway
 * Configurer l'exécution de l'application en mode "Multiple startup projects" et sélectionner les projets suivants :
-    * BowlingApi
+    * BowlingApi: RestFull
     * Bowling Api Gateway
-    * GraphQL Project
+    * GraphQL Project: GraphQL
 * Build le projet.
 * L'application est prête à être utilisée.
+
+#### pour l'API RestFull
+* Configurer l'exécution de l'application en mode "Multiple startup projects" et sélectionner les projets suivants :
+    * BowlingApi: Https
+* Build le projet.
+* L'application est prête à être utilisée.
+
+#### pour l'API GraphQL
+* Configurer l'exécution de l'application en mode "Multiple startup projects" et sélectionner les projets suivants :
+    * GraphQL Project: GraphQL
+* Build le projet.
+* L'application est prête à être utilisée.
+
+## Requêtes GraphQL
+url:
+```shell
+https://localhost:7197/graphql/
+```
+
+### Créer un joueur
+
+```graphql
+mutation Addjoueur{
+  addjoueur (input:  {
+    pseudo:"dadada"
+  }){
+    joueur {
+      pseudo
+    }
+  }
+}
+```
+
+### Récupérer tous les joueurs
+
+```graphql
+ query GetJoueur{
+  joueurs{
+    id
+    pseudo
+  }
+}
+```
+
+## Requêtes RestFull
+
+Client RestFull utilisé : Postman
+lien de la collection : https://codefirst.iut.uca.fr/git/victor_perez.ngounou/ApiBowlingProject/-/blob/master/Documentation/RestFull%20API%20Bowling.postman_collection.json
+
+
 
 ## Usage
 

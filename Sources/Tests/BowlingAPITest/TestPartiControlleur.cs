@@ -53,21 +53,7 @@ namespace BowlingAPITest
             testItems.Add(new PartieDTO { Score = 2 });
             return testItems;
         }
-        //[Fact]
-        //public async Task Get_With_Invalid_id_Should_Return_BadRequest()
-        //{
-        //    // Arrange
-        //    var PartieController = new PartieController(null);
-
-        //    // Act
-        //    var result = await PartieController.Get(0);
-
-        //    // Assert
-        //    result.Should().BeOfType<BadRequestObjectResult>();
-        //    var badRequestResult = result as BadRequestObjectResult;
-        //    badRequestResult.Value.Should().Be("Le id de la partie est obligatoire");
-        //}
-
+        
         [Fact]
         public async Task Get_With_Valid_id_Should_Return_Ok_With_partie()
         {
@@ -141,22 +127,7 @@ namespace BowlingAPITest
             result.Should().BeOfType<NotFoundResult>();
         }
 
-        //[Fact]
-        //public async Task Get_White_id_ShouldReturnNotFound()
-        //{
-        //    // Arrange
-
-        //    var partie1 = new PartieDTO { Score = 1 };
-        //    var mockService = new Mock<IpartieService>();
-        //    mockService.Setup(service => service.GetDataWithId(2)).ReturnsAsync(partie1);
-        //    var controller = new PartieController(mockService.Object);
-
-        //    // Act
-        //    var result = await controller.Get(2);
-
-        //    // Assert
-        //    result.Should().BeOfType<NotFoundResult>();
-        //}
+       
         [Fact]
         public async Task Get_ShouldReturnInternalServerError()
         {
@@ -172,24 +143,8 @@ namespace BowlingAPITest
             result.Should().BeOfType<ObjectResult>();
             result.StatusCode.Should().Be(500);
         }
-        //TEST POST
-        //[Fact]
-        //public async Task Post_With_Invalid_parti_Should_Return_BadRequest()
-        //{
-        //    // Arrange
-        //    var PartieController = new PartieController(null);
-
-        //    // Act
-        //    var result = await PartieController.Post(null);
-
-        //    // Assert
-        //    result.Should().BeOfType<ActionResult<PartieDTO>>();
-        //    var actionResult = result as ActionResult<PartieDTO>;
-        //    actionResult.Result.Should().BeOfType<BadRequestObjectResult>();
-        //    var badRequestResult = actionResult.Result as BadRequestObjectResult;
-        //    badRequestResult.Value.Should().Be("La partie est obligatoire");
-        //}
-
+        
+        
 
         [Fact]
         void test()

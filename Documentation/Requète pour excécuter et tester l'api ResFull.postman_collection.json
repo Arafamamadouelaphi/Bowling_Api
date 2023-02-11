@@ -1,0 +1,308 @@
+{
+	"info": {
+		"_postman_id": "03cfff4d-c3f5-4b46-af15-385a3b14f51c",
+		"name": "Requète pour excécuter et tester l'api ResFull",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "19401801"
+	},
+	"item": [
+		{
+			"name": "https://localhost:7097/api/v1/Joueur",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "https://localhost:7097/api/v1/Joueur",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7097",
+					"path": [
+						"api",
+						"v1",
+						"Joueur"
+					]
+				},
+				"description": "# Requète pour excécuter et tester l'api ResFull"
+			},
+			"response": []
+		},
+		{
+			"name": "https://localhost:7097/api/v1/Joueur/1/10",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:7097/api/v1/Joueur/1/10",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7097",
+					"path": [
+						"api",
+						"v1",
+						"Joueur",
+						"1",
+						"10"
+					]
+				},
+				"description": "**Recuperer les joueurs par pagination**  \ntemplate:\n\n```uri  \nhttps://localhost:7097/api/v1/Joueur/{page}/{pageSize}\n```"
+			},
+			"response": []
+		},
+		{
+			"name": "https://localhost:7097/api/v1/Joueur",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"pseudo\": \"vic\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:7097/api/v1/Joueur",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7097",
+					"path": [
+						"api",
+						"v1",
+						"Joueur"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://localhost:7097/api/v1/Joueur/3",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"id\":3,\n    \"pseudo\":\"maman\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:7097/api/v1/Joueur/3",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7097",
+					"path": [
+						"api",
+						"v1",
+						"Joueur",
+						"3"
+					]
+				},
+				"description": "**Metre à jour un joueur de la base de donnée**\n```url\nhttps://localhost:7097/api/v1/Joueur/{id}\n```"
+			},
+			"response": []
+		},
+		{
+			"name": "https://localhost:7097/api/v2/Joueur/1/10?name=vic",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:7097/api/v2/Joueur/1/10?name=vic",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7097",
+					"path": [
+						"api",
+						"v2",
+						"Joueur",
+						"1",
+						"10"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "vic"
+						}
+					]
+				},
+				"description": "**Recuperer les joueurs par pagination et filtrage de donnée par pseudo**\nTemplate:\n```url\nhttps://localhost:7097/api/v1/Joueur/{page}/{pageSize}?name=\"pseudo\"\n```"
+			},
+			"response": []
+		},
+		{
+			"name": "https://localhost:7097/api/v2/Joueur/1/10?name=vic",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:7097/api/v2/Joueur/vic",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7097",
+					"path": [
+						"api",
+						"v2",
+						"Joueur",
+						"vic"
+					]
+				},
+				"description": "**Get joueur by name**\nTemplate:\n```url\nhttps://localhost:7097/api/v2/Joueur/{name}\n```"
+			},
+			"response": []
+		},
+		{
+			"name": "https://localhost:7097/api/v2/Joueur/4",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:7097/api/v2/Joueur/5",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7097",
+					"path": [
+						"api",
+						"v2",
+						"Joueur",
+						"5"
+					]
+				},
+				"description": "**Supprimer un joueur de la base de donnée**\nTemplate:\n```url\nhttps://localhost:7097/api/v2/Joueur/{id}\n```"
+			},
+			"response": []
+		},
+		{
+			"name": "https://localhost:7097/api/v1/Partie",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:7097/api/v1/Partie",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7097",
+					"path": [
+						"api",
+						"v1",
+						"Partie"
+					]
+				},
+				"description": "**Lister toutes les parties jouer**\nTemplate:\n```url\nhttps://localhost:7097/api/v1/Partie\n```"
+			},
+			"response": []
+		},
+		{
+			"name": "https://localhost:7097/api/v1/Partie",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"joueur\": {\n    \"pseudo\": \"vic\"\n},\n  \"score\": 7\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:7097/api/v1/Partie",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7097",
+					"path": [
+						"api",
+						"v1",
+						"Partie"
+					]
+				},
+				"description": "**Crée une partie**\n"
+			},
+			"response": []
+		},
+		{
+			"name": "https://localhost:7097/api/v1/Partie/8",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:7097/api/v1/Partie/8",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7097",
+					"path": [
+						"api",
+						"v1",
+						"Partie",
+						"8"
+					]
+				},
+				"description": "**Get partie by id**"
+			},
+			"response": []
+		},
+		{
+			"name": "https://localhost:7097/api/v1/Partie/8",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"id\": 8,\n  \"joueur\": {\n    \"pseudo\": \"vic\"\n  },\n  \"score\": 48\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:7097/api/v1/Partie/8",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7097",
+					"path": [
+						"api",
+						"v1",
+						"Partie",
+						"8"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

@@ -14,8 +14,8 @@ using Microsoft.AspNetCore.Mvc;
 namespace BowlingApi.Controllers
 {
 
-
-    [Route("api/[controller]")]
+    [ApiVersion("1")]
+    [Route("api/v{version:apiVersion}/[controller]")]
     [ApiController]
     public class PartieController : ControllerBase
     {
@@ -148,7 +148,7 @@ namespace BowlingApi.Controllers
                     return BadRequest("La partie est obligatoire");
 
                 var updatepartie = _partieService.Update(partie);
-                if (updatepartie.Result == null)
+                if (updatepartie.Result == false)
                 {
                     return NotFound();
                 }
