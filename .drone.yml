@@ -77,6 +77,8 @@ steps:
       CONTAINERNAME: bowling-api-rest:latest
       COMMAND: create
       OVERWRITE: true
+    depends_on:
+      - docker-build-and-push-api-rest
 
 volumes:
 - name: docs
