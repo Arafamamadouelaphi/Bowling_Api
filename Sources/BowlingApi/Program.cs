@@ -62,18 +62,13 @@ builder.Services.AddLogging(configure =>
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
+app.UseSwagger();
+app.UseSwaggerUI(c =>
 {
-    
-   
-    app.UseSwagger();
-    app.UseSwaggerUI(c =>
-    {
-        c.SwaggerEndpoint("/swagger/v1/swagger.json", "API du projet Bowling APP v1");
-        c.SwaggerEndpoint("/swagger/v2/swagger.json", "API du projet Bowling APP v2");
+    c.SwaggerEndpoint("/swagger/v1/swagger.json", "API du projet Bowling APP v1");
+    c.SwaggerEndpoint("/swagger/v2/swagger.json", "API du projet Bowling APP v2");
         
-    });
-}
+});
 
 app.UseRouting();
 app.UseEndpoints(endpoint=>

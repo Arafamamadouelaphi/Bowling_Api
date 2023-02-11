@@ -6,8 +6,13 @@
         <ImplicitUsings>enable</ImplicitUsings>
         <RootNamespace>Bowling_Api_Gateway</RootNamespace>
         <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+        <OutputType>WinExe</OutputType>
     </PropertyGroup>
 
+    <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+      <WarningLevel>4</WarningLevel>
+    </PropertyGroup>
+    <PropertyGroup Condition=" '$(RunConfiguration)' == 'Bowling Api Gateway' " />
     <ItemGroup>
       <PackageReference Include="Ocelot" Version="18.0.0" />
     </ItemGroup>
