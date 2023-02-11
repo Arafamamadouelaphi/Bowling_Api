@@ -48,7 +48,7 @@ steps:
       dockerfile: Sources/DockerfileRestFull
       context: Sources
       registry: hub.codefirst.iut.uca.fr
-      repo: hub.codefirst.iut.uca.fr/victor_perez.ngounou/BowlingGameAPI
+      repo: hub.codefirst.iut.uca.fr/victor_perez.ngounou/bowling-api-rest
       username:
         from_secret: SECRET_REGISTRY_USERNAME
       password:
@@ -62,7 +62,7 @@ steps:
       dockerfile: Sources/Bowling Api Gateway/Dockerfile
       context: Sources/DockerfileGateway
       registry: hub.codefirst.iut.uca.fr
-      repo: hub.codefirst.iut.uca.fr/victor_perez.ngounou/BowlingGameAPI
+      repo: hub.codefirst.iut.uca.fr/victor_perez.ngounou/bowling-api-gateway
       username:
         from_secret: SECRET_REGISTRY_USERNAME
       password:
