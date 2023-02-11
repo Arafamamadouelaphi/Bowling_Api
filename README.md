@@ -112,8 +112,12 @@ mutation Addjoueur{
 ## Requêtes RestFull
 
 Client RestFull utilisé : Postman
-lien de la collection : https://codefirst.iut.uca.fr/git/victor_perez.ngounou/ApiBowlingProject/-/blob/master/Documentation/RestFull%20API%20Bowling.postman_collection.json
 
+lien de la collection : [Collection postman](https://codefirst.iut.uca.fr/git/victor_perez.ngounou/ApiBowlingProject/src/branch/main/Documentation/Requète%20pour%20excécuter%20et%20tester%20l%27api%20ResFull.postman_collection.json)
+url swagger local :
+```url
+https://localhost:7097/swagger/index.html
+```
 
 
 ## Usage
