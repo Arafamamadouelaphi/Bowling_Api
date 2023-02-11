@@ -5,13 +5,13 @@ EXPOSE 443
 
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 WORKDIR /src
-COPY ["Sources/BowlingApi/BowlingApi.csproj", "BowlingApi/"]
-COPY ["Sources/BowlingService/BowlingService.csproj", "BowlingService/"]
-COPY ["Sources/BowlingLib/BowlingLib.csproj", "BowlingLib/"]
-COPY ["Sources/BowlingRepository/BowlingRepository.csproj", "BowlingRepository/"]
-COPY ["Sources/BowlingEF/BowlingEF.csproj", "BowlingEF/"]
-COPY ["Sources/DTOs/DTOs.csproj", "DTOs/"]
-COPY ["Sources/Mapper/Mapper.csproj", "Mapper/"]
+COPY ["BowlingApi/BowlingApi.csproj", "BowlingApi/"]
+COPY ["BowlingService/BowlingService.csproj", "BowlingService/"]
+COPY ["BowlingLib/BowlingLib.csproj", "BowlingLib/"]
+COPY ["BowlingRepository/BowlingRepository.csproj", "BowlingRepository/"]
+COPY ["BowlingEF/BowlingEF.csproj", "BowlingEF/"]
+COPY ["DTOs/DTOs.csproj", "DTOs/"]
+COPY ["Mapper/Mapper.csproj", "Mapper/"]
 RUN dotnet restore "BowlingApi/BowlingApi.csproj"
 COPY . .
 WORKDIR "/src/BowlingApi"
