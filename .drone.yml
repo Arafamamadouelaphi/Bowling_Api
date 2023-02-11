@@ -59,8 +59,8 @@ steps:
   - name: docker-build-and-push-api-gateway
     image: plugins/docker
     settings:
-      dockerfile: Sources/Bowling Api Gateway/Dockerfile
-      context: Sources/DockerfileGateway
+      dockerfile: Sources/DockerfileGateway
+      context: Sources
       registry: hub.codefirst.iut.uca.fr
       repo: hub.codefirst.iut.uca.fr/victor_perez.ngounou/bowling-api-gateway
       username:
