@@ -5,7 +5,7 @@ EXPOSE 443
 
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 WORKDIR /src
-COPY ["Bowling Api Gateway/Bowling Api Gateway.csproj", "Bowling Api Gateway/"]
+COPY ["Sources/Bowling Api Gateway/Bowling Api Gateway.csproj", "Bowling Api Gateway/"]
 RUN dotnet restore "Bowling Api Gateway/Bowling Api Gateway.csproj"
 COPY . .
 WORKDIR "/src/Bowling Api Gateway"
