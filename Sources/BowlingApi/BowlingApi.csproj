@@ -14,7 +14,7 @@
     <PropertyGroup Condition=" '$(RunConfiguration)' == 'RestFull' " />
     <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
       <WarningLevel>4</WarningLevel>
-      <DocumentationFile>BowlingApi.xml</DocumentationFile>
+      <DocumentationFile>../BowlingApi.xml</DocumentationFile>
     </PropertyGroup>
     <ItemGroup>
         <!--<PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="7.0.0" />-->

@@ -1,0 +1,95 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>BowlingApi</name>
+    </assembly>
+    <members>
+        <member name="M:BowlingApi.Controllers.JoueurController.Get">
+            <summary>
+            Get all Players
+            GET: api/joueur
+            </summary>
+            <returns>la liste des Joueurs </returns>
+            <response code="200">Retourne la liste des joueurs</response>
+            <response code="404">Si la liste est vide</response>
+            <response code="500">Si une erreur est survenue</response>
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:BowlingApi.Controllers.JoueurController.Get(System.Int32,System.Int32)" -->
+        <!-- Badly formed XML comment ignored for member "M:BowlingApi.Controllers.JoueurController.Get(System.Int32,System.Int32,System.String)" -->
+        <member name="M:BowlingApi.Controllers.JoueurController.Get(System.String)">
+            <summary>
+            Get a player by name
+            GET: api/Joueur/Djon
+            </summary>
+            <param name="name"></param>
+            <response code="200">Retourne le joueur</response>
+            <response code="400">Si le nom du joueur est null</response>
+            <response code="404">Si le joueur n'existe pas</response>
+            <response code="500">Si une erreur est survenue</response>
+        </member>
+        <member name="M:BowlingApi.Controllers.JoueurController.Post(DTOs.JoueurDTO)">
+            <summary>
+            Creer un joueur
+            POST: api/Joueur
+            </summary>
+            <param name="joueur"></param>
+            <response code="201">Retourne le joueur créé</response>
+            <response code="400">Si le joueur est null</response>
+            <response code="500">Si une erreur est survenue</response>
+        </member>
+        <member name="M:BowlingApi.Controllers.JoueurController.Put(System.Int64,DTOs.JoueurDTO)">
+            <summary>
+            Modifier un joueur
+            PUT: api/Joueur/5
+            </summary>
+            <param name="id"></param>
+            <param name="joueur"></param>
+            <response code="200">Retourne le joueur modifié</response>
+            <response code="400">Si le joueur est null</response>
+            <response code="404">Si le joueur n'existe pas</response>
+            <response code="500">Si une erreur est survenue</response>
+        </member>
+        <member name="M:BowlingApi.Controllers.JoueurController.Delete(System.Int64)">
+            <summary>
+            Supprimer un joueur par son id
+            DELETE: api/Joueur/5
+            </summary>
+            <param name="id"></param>
+            <response code="200">Retourne le joueur supprimé</response>
+            <response code="404">Si le joueur n'existe pas</response>
+            <response code="500">Si une erreur est survenue</response>
+        </member>
+        <member name="M:BowlingApi.Controllers.PartieController.Get">
+            <summary>
+            Get all partie
+            GET: api/parti
+            </summary>
+            <returns>la liste des parti </returns>
+            <response code="200">Retourne la liste des joueurs</response>
+            <response code="404">Si la liste est vide</response>
+            <response code="500">Si une erreur est survenue</response>
+        </member>
+        <member name="M:BowlingApi.Controllers.PartieController.Post(DTOs.PartieDTO)">
+            <summary>
+            Creeation
+            POST: api/parti
+            </summary>
+            <param name="parti"></param>
+            <response code="201">Retourne la parti créé</response>
+            <response code="400">Si la parti est null</response>
+            <response code="500">Si une erreur est survenue</response>
+        </member>
+        <member name="M:BowlingApi.Controllers.PartieController.Put(System.Int64,DTOs.PartieDTO)">
+            <summary>
+            Modification partie
+            PUT: api/parti/5
+            </summary>
+            <param name="id"></param>
+            <param name="partie"></param>
+            <response code="200">Retourne la modification</response>
+            <response code="400">Si le partie est null</response>
+            <response code="404">Si le partie n'existe pas</response>
+            <response code="500">Si une erreur est survenue</response>
+        </member>
+    </members>
+</doc>
