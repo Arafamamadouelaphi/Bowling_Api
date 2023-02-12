@@ -8,7 +8,7 @@ namespace BowlingEF.Entities
     /// Classe de gestion des frames
     /// </summary>
     public class FrameDTO
-    {
+    {//proprieté
         #region Properties
         
         public long Id { get; set; }

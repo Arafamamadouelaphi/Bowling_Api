@@ -10,13 +10,16 @@ namespace DTOs
     /// Classe de gestion des equipes
     /// </summary>
     public class EquipeDTO
-    {
+    {//les proprietés
         #region Propriétés
         public long Id { get; set; }
         public string Nom { get; set; }
         public ICollection<JoueurDTO> Joueurs { get; set; }
         #endregion
         #region Constructeurs
+        //constructeur
+
+
         public EquipeDTO()
         {
             Joueurs = new List<JoueurDTO>();

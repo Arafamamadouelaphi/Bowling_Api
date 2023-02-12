@@ -8,26 +8,27 @@ using Microsoft.EntityFrameworkCore;
 namespace BowlingService
 {
     public class EquipeDbDataManager : IDataManager<Equipe>
-    {
+    {        // Un contexte de bowling qui fournit une interface pour accéder à la base de données
         private readonly BowlingContext _context;
-        
+        // Le constructeur prend en entrée un contexte de bowling
         public EquipeDbDataManager(BowlingContext context)
-        {
+        {            // Stocker le contexte de bowling pour une utilisation ultérieure
             _context = context;
         }
-        
+        // Les méthodes suivantes fournissent une implémentation pour les méthodes déclarées dans l'interface IDataManager
         #region Méthodes
         public async Task<bool> Add(Equipe _equipe)
-        {
+        {            // Indicateur de résultat pour déterminer si l'opération a réussi ou échoué
             bool result = false;
-             EquipeEntity entity = new EquipeEntity
+            // Mapping entre la classe Equipe et la classe EquipeEntity
+            EquipeEntity entity = new EquipeEntity
                 {
                     Id = _equipe.Id,
                     Nom = _equipe.Nom,
                     
                 };
-
-                for (int i = 0; i < _equipe.Joueurs.Count; i++)
+            // Boucle sur la liste des joueurs dans l'équipe
+            for (int i = 0; i < _equipe.Joueurs.Count; i++)
                 {
                     //Mapping entre la classe joueur et la classe joueurEntity
                     JoueurEntity joueurEntity = new JoueurEntity
@@ -50,9 +51,8 @@ namespace BowlingService
 
                         //Parcourt de la liste des frames d'une partie
                         for (int k = 0; k < _equipe.Joueurs[i].Parties[j].Frames.Count; k++)
-                        {
-                            //Mapping entre les frames d'une partie et les frameEntity d'une partieEntity
-                            FrameEntity frameEntity = new FrameEntity
+                    {                        // Mapping entre la classe Frame et la classe FrameEntity
+                        FrameEntity frameEntity = new FrameEntity
                             {
                                 Id = _equipe.Joueurs[i].Parties[j].Frames[k].Id,
                                 Lancer1 = _equipe.Joueurs[i].Parties[j].Frames[k].Lancer1.QuillesTombees,
