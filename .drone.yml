@@ -76,17 +76,7 @@ steps:
           - master
         
    #container deployment
-  - name: deploy-container-restfull
-    image: hub.codefirst.iut.uca.fr/thomas.bellembois/codefirst-dockerproxy-clientdrone:latest
-    environment:
-      IMAGENAME: hub.codefirst.iut.uca.fr/victor_perez.ngounou/bowling-api-rest:latest
-      CONTAINERNAME: bowling-api-rest
-      COMMAND: create
-      OVERWRITE: true
-    depends_on: [docker-build-and-push-api-rest]
-    when:
-        branch:
-            - master
+  
     
   - name: deploy-container-gateway
     image: hub.codefirst.iut.uca.fr/thomas.bellembois/codefirst-dockerproxy-clientdrone:latest
