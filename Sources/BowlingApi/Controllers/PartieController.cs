@@ -166,7 +166,37 @@ namespace BowlingApi.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError, e.Message);
                 throw;
             }
-        }
+        }/// <summary>
+         /// Supprimer une partie par son id
+         /// DELETE: api/parti/5
+         /// </summary>
+         /// <param name="id"></param>
+         /// <response code="200">Retourne la partie  supprimé</response>
+         /// <response code="404">Si la partie n'existe pas</response>
+         /// <response code="500">Si une erreur est survenue</response>
+        [HttpDelete("{id}")]
+        [ProducesResponseType(typeof(string), StatusCodes.Status500InternalServerError)]
+        [ProducesResponseType(typeof(string), StatusCodes.Status404NotFound)]
+        [ProducesResponseType(typeof(bool), StatusCodes.Status200OK)]
+       // [MapToApiVersion("2")]
+        //public async Task<ActionResult<bool>> Delete(long id)
+        //{
+        //    try
+        //    {
+        //        var parti = _partieService.Delete(id);
+        //        if (parti.Result == false)
+        //        {
+        //            return NotFound();
+        //        }
+        //        return Ok(parti);
+        //    }
+        //    catch (Exception e)
+        //    {
+        //        StatusCode(StatusCodes.Status500InternalServerError, e.Message);
+        //        throw;
+        //    }
+      //  }
+
 
         /// <summary>
         /// Modification partie
