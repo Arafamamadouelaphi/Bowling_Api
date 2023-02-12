@@ -19,7 +19,7 @@ builder.Services.AddSwaggerGen(c=>
 {
     c.SwaggerDoc("v1", new() { Title = "APi Bowling APP", Version = "v1" });
     c.SwaggerDoc("v2", new() { Title = "APi Bowling APP", Version = "v2" });
-    c.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, "BowlingApi.xml"));
+    //c.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, "BowlingApi.xml"));
     
 });
 
