@@ -39,7 +39,7 @@ steps:
     when:
       branch:
         - master
-    depends_on: [ build ]
+    depends_on: [build]
     
   # docker image build
   - name: docker-build-and-push-api-rest
@@ -53,7 +53,7 @@ steps:
         from_secret: SECRET_REGISTRY_USERNAME
       password:
         from_secret: SECRET_REGISTRY_PASSWORD
-      depends_on: [ build ]
+      depends_on: [build]
       when:
         branch:
           - master
@@ -70,7 +70,7 @@ steps:
         from_secret: SECRET_REGISTRY_USERNAME
       password:
         from_secret: SECRET_REGISTRY_PASSWORD
-      depends_on: [ build ]
+      depends_on: [build]
       when:
         branch:
           - master
@@ -83,8 +83,7 @@ steps:
       CONTAINERNAME: bowling-api-rest
       COMMAND: create
       OVERWRITE: true
-    depends_on:
-      - docker-build-and-push-api-rest
+    depends_on: [docker-build-and-push-api-rest]
     when:
         branch:
             - master
@@ -96,8 +95,7 @@ steps:
       CONTAINERNAME: bowling-api-gateway
       COMMAND: create
       OVERWRITE: true
-    depends_on:
-      - docker-build-and-push-api-gateway
+    depends_on: [docker-build-and-push-api-gateway]
     when: 
       branch:
         - master
