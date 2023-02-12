@@ -152,6 +152,27 @@ public async Task<PartieDTO> Add(PartieDTO _partie)
             return result;
 
         }
+
+        public async Task<bool> Delete(long _partiid)
+        {
+            var result = false;
+            try
+            {
+                result = await _IpartieRepository.Delete(_partiid);
+
+                if (result)
+                    _logger.LogInformation("A parti was deleted : {player}", _partiid);
+                else
+                    _logger.LogWarning("A parti not found : {player}", _partiid);
+
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error while deleting player : {player}", _partiid);
+                throw;
+            }
+            return result;
+        }
     }
 }
 

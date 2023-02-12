@@ -121,6 +121,67 @@ namespace BowlingApi.Controllers
 
         }
 
+        [HttpGet("{page}/{pageSize}")]
+        [ProducesResponseType(typeof(string), StatusCodes.Status500InternalServerError)]
+        [ProducesResponseType(typeof(string), StatusCodes.Status404NotFound)]
+        [ProducesResponseType(typeof(IEnumerable<PartieDTO>), StatusCodes.Status200OK)]
+        public async Task<IActionResult> Get(int page = 1, int pageSize = 10)
+        {
+            try
+            {
+                var result = await _partieService.GetAll();
+                if (result == null)
+                {
+                    return NotFound();
+                }
+                var data = result.Skip((page - 1) * pageSize).Take(pageSize);
+                Response.Headers.Add("X-Pagination", Newtonsoft.Json.JsonConvert.SerializeObject(new
+                {
+                    totalCount = result.Count(),
+                    pageSize = pageSize,
+                    currentPage = page,
+                    totalPages = (int)Math.Ceiling(result.Count() / (double)pageSize)
+                }));
+                return Ok(data);
+            }
+            catch (Exception e)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, e.Message);
+                throw;
+            }
+        }
+        /// <summary>
+        /// Supprimer une partie par son id
+        /// DELETE: api/parti/5
+        /// </summary>
+        /// <param name="id"></param>
+        /// <response code="200">Retourne la partie  supprimé</response>
+        /// <response code="404">Si la partie n'existe pas</response>
+        /// <response code="500">Si une erreur est survenue</response>
+        [HttpDelete("{id}")]
+        [ProducesResponseType(typeof(string), StatusCodes.Status500InternalServerError)]
+        [ProducesResponseType(typeof(string), StatusCodes.Status404NotFound)]
+        [ProducesResponseType(typeof(bool), StatusCodes.Status200OK)]
+        [MapToApiVersion("2")]
+        public async Task<ActionResult<bool>> Delete(long id)
+        {
+            try
+            {
+                var parti = _partieService.Delete(id);
+                if (parti.Result == false)
+                {
+                    return NotFound();
+                }
+                return Ok(parti);
+            }
+            catch (Exception e)
+            {
+                StatusCode(StatusCodes.Status500InternalServerError, e.Message);
+                throw;
+            }
+        }
+
+
         /// <summary>
         /// Modification partie
         /// PUT: api/parti/5

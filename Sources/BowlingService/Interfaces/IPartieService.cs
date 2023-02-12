@@ -8,6 +8,7 @@ namespace BowlingService.Interfaces
     {
         public Task<PartieDTO> Add(PartieDTO _partie);
         public Task<bool> Delete(PartieDTO _partie);
+        public Task<bool> Delete(long id);
         public Task<bool> Update(PartieDTO _partie);
         public Task<IEnumerable<PartieDTO>> GetAll();
         public Task<IEnumerable<PartieEntity>> GetAllWithDate(DateTime date);
