@@ -63,7 +63,15 @@ namespace BowlingApi.Controllers
             //return Ok(result);
         }
 
-        // GET: api/Partie/djon
+        /// <summary>
+        /// Get a partie by id
+        /// GET: api/parti/Djon
+        /// </summary>
+        /// <param name="id"></param>
+        /// <response code="200">Retourne la parti</response>
+        /// <response code="400">Si le id null</response>
+        /// <response code="404">Si la partie existe pas</response>
+        /// <response code="500">Si une erreur est survenue</response>
         [HttpGet("{id}")]
         public async Task<IActionResult> Get(int id)
         {
