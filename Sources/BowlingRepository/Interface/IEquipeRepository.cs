@@ -1,7 +1,9 @@
   using BowlingEF.Entities;
 
 namespace BowlingRepository.Interface;
-
+/// <summary>
+/// Interface définissant les méthodes nécessaires pour gérer les opérations CRUD pour les entités `EquipeEntity`.
+/// </summary>
 public interface IEquipeRepository
 {
     public void Add(EquipeEntity equipe);
