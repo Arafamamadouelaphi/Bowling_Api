@@ -76,7 +76,7 @@ steps:
           - master
         
    #container deployment
-  
+ 
     
   - name: deploy-container-gateway
     image: hub.codefirst.iut.uca.fr/thomas.bellembois/codefirst-dockerproxy-clientdrone:latest
@@ -93,3 +93,5 @@ steps:
 volumes:
 - name: docs
   temp: {}
+  
+  
