@@ -76,7 +76,7 @@ app.UseEndpoints(endpoint=>
     endpoint.MapControllers();
 });
 
-app.UseHttpsRedirection();
+//app.UseHttpsRedirection();
 
 app.UseAuthorization();
 
