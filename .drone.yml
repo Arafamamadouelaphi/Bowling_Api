@@ -54,9 +54,9 @@ steps:
       password:
         from_secret: SECRET_REGISTRY_PASSWORD
       depends_on: [build]
-      when:
-        branch:
-          - master
+     # when:
+      #  branch:
+       #   - master
 
 
   - name: docker-build-and-push-api-gateway
@@ -71,12 +71,22 @@ steps:
       password:
         from_secret: SECRET_REGISTRY_PASSWORD
       depends_on: [build]
-      when:
-        branch:
-          - master
+      #when:
+       # branch:
+        #  - master
         
    #container deployment
- 
+  - name: deploy-container-restfull
+    image: hub.codefirst.iut.uca.fr/thomas.bellembois/codefirst-dockerproxy-clientdrone:latest
+    environment:
+      IMAGENAME: hub.codefirst.iut.uca.fr/victor_perez.ngounou/bowling-api-rest:latest
+      CONTAINERNAME: bowling-api-rest
+      COMMAND: create
+      OVERWRITE: truee
+    depends_on: [docker-build-and-push-api-rest]
+   # when:
+    #    branch:
+     #       - master
     
   - name: deploy-container-gateway
     image: hub.codefirst.iut.uca.fr/thomas.bellembois/codefirst-dockerproxy-clientdrone:latest
@@ -84,11 +94,11 @@ steps:
       IMAGENAME: hub.codefirst.iut.uca.fr/victor_perez.ngounou/bowling-api-gateway:latest
       CONTAINERNAME: bowling-api-gateway
       COMMAND: create
-      OVERWRITE: true
+      OVERWRITE: truee
     depends_on: [docker-build-and-push-api-gateway]
-    when: 
-      branch:
-        - master
+    #when: 
+     # branch:
+      #  - master
 
 volumes:
 - name: docs
