@@ -20,7 +20,7 @@ namespace BowlingEF.Context
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlite("Data Source=bowling.db");
+            optionsBuilder.UseSqlite("Data Source=src/BowlingEF/bowling.db");
         }
 
         public BowlingContext()
