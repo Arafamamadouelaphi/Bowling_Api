@@ -126,18 +126,6 @@ https://localhost:7097/swagger/index.html
 * Build the solution
 * Run the application
 
-## Contributeurs
-
-* [Victor Perez NGOUNOU](https://codefirst.iut.uca.fr/git/victor_perez.ngounou)
-* [Mamadou Elaphi ARAFA](https://codefirst.iut.uca.fr/git/mamadou_elaphi.arafa)
-
-
-## Support
-
-Contactez-moi à l'un des endroits suivants !
-
-* Website at <a href="https://codefirst.iut.uca.fr/git/victor_perez.ngounou" target="_blank">`https://codefirst.iut.uca.fr/git/victor_perez.ngounou`</a>
-* Email at <a href="mailto:victor_perez.ngounou@etu.uca.fr" target="_blank">`victor_perez.ngounou@etu.uca.fr`</a>
 
 ## License
 
